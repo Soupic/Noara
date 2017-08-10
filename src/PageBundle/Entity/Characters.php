@@ -45,7 +45,7 @@ class Characters
 
     /**
      * @var Collection
-     * @ORM\OneToMany(targetEntity="Races", mappeBy="characters")
+     * @ORM\OneToMany(targetEntity="Races", mappedBy="characters")
      *
      */
     private $races;

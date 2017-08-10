@@ -3,6 +3,7 @@
 namespace PageBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Races
@@ -46,7 +47,7 @@ class Races
      * @var Characters
      * @JMS\Type("PageBundle\Entity\Characters")
      * @ORM\ManyToOne(targetEntity="Characters", inversedBy="races")
-     * @ROM\JoinColumn(name="characters_id", referencedColumnName="id_characters")
+     * @ORM\JoinColumn(name="characters_id", referencedColumnName="id_characters")
      */
     private $characters;
 
