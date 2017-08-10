@@ -15,7 +15,7 @@ class Races
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id_races", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -41,6 +41,14 @@ class Races
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @var Characters
+     * @JMS\Type("PageBundle\Entity\Characters")
+     * @ORM\ManyToOne(targetEntity="Characters", inversedBy="races")
+     * @ROM\JoinColumn(name="characters_id", referencedColumnName="id_characters")
+     */
+    private $characters;
 
 
     /**
@@ -123,6 +131,22 @@ class Races
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCharacters()
+    {
+        return $this->characters;
+    }
+
+    /**
+     * @param int $characters
+     */
+    public function setCharacters($characters)
+    {
+        $this->characters = $characters;
     }
 }
 

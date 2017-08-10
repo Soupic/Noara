@@ -2,6 +2,7 @@
 
 namespace PageBundle\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,7 +16,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id_characters", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -41,6 +42,13 @@ class Characters
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Races", mappeBy="characters")
+     *
+     */
+    private $races;
 
 
     /**
@@ -123,6 +131,22 @@ class Characters
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRaces()
+    {
+        return $this->races;
+    }
+
+    /**
+     * @param int $races
+     */
+    public function setRaces($races)
+    {
+        $this->races = $races;
     }
 }
 
