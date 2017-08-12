@@ -12,6 +12,7 @@ class DefaultController extends Controller
      */
     public function indexAction()
     {
+        $test = $this->get
         return $this->render('PageBundle:Default:index.html.twig');
     }
 }

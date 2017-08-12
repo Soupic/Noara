@@ -11,9 +11,10 @@ namespace PageBundle\Controller;
 
 use PageBundle\Entity\Races;
 use PageBundle\Enum\ActionEnum;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
-class RacesController
+class RacesController extends Controller
 {
     public function addAction(Request $request)
     {
@@ -34,6 +35,6 @@ class RacesController
         $action
     ) {
         //appel du service qu gère le formulaire
-        $formService = $this->get("");
+        $formService = $this->get("noara.page.form.post");
     }
 }

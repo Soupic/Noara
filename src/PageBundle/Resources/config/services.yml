@@ -1,4 +1,5 @@
 services:
-#    page.example:
-#        class: PageBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    noara.page.form.post:
+        class: PageBundle\Service\Form\PostForm
+        lazy: true
+        shared: true
