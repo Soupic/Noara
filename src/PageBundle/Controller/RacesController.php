@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RacesController extends Controller
 {
@@ -22,6 +23,7 @@ class RacesController extends Controller
     {
         //Création de l'instance la race
         $race = new Races();
+
         //appel de la méthode qui gère le formulaire
         return $this->managementForm(
             $request,

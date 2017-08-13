@@ -3,17 +3,28 @@
 namespace PageBundle\Service\Form;
 
 
-use Doctrine\DBAL\Types\TextType;
 use PageBundle\Entity\Races;
 use PageBundle\Enum\ActionEnum;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class PostForm extends AbstractMasterForm
+class PostForm
 {
     const NOM_FORM = "Races";
     const CLE_NAME = "Name";
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $formFactory;
+
+    public function __construct(FormFactoryInterface $formFactory)
+    {
+        $this->formFactory = $formFactory;
+    }
 
     /**
      * @param Races $race

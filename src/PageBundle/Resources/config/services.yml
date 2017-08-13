@@ -3,3 +3,5 @@ services:
         class: PageBundle\Service\Form\PostForm
         lazy: true
         shared: true
+        arguments:
+            - "@form.factory"
