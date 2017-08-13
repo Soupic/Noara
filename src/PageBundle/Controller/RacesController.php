@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: picsou
- * Date: 10/08/17
- * Time: 15:29
- */
 
 namespace PageBundle\Controller;
 
@@ -13,9 +7,17 @@ use PageBundle\Entity\Races;
 use PageBundle\Enum\ActionEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class RacesController extends Controller
 {
+    /**
+     * class PostController
+     * @param Request $request
+     * @Route("post/")
+     * @return RedirectResponse|Response
+     */
     public function addAction(Request $request)
     {
         //Création de l'instance la race
@@ -29,6 +31,12 @@ class RacesController extends Controller
 
     }
 
+    /**
+     * @param Request $request
+     * @param Races   $race
+     * @param         $action
+     * @return Response
+     */
     private function managementForm(
         Request $request,
         Races $race,
