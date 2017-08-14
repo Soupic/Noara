@@ -5,7 +5,9 @@ namespace PageBundle\Service\Form;
 
 use PageBundle\Entity\Races;
 use PageBundle\Enum\ActionEnum;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -15,6 +17,8 @@ class PostForm
 {
     const NOM_FORM = "Races";
     const CLE_NAME = "Name";
+    const KEY_CONTENT = "Contenu";
+    const KEY_ACTIVE = "Active";
 
     /**
      * @var FormFactoryInterface
@@ -68,6 +72,24 @@ class PostForm
             )
         );
 
+        $form->add(
+            self::KEY_CONTENT,
+            TextareaType::class,
+            $this->getOptionFieldContent(
+                $race,
+                ActionEnum::ADD
+            )
+        );
+
+        $form->add(
+            self::KEY_ACTIVE,
+            CheckboxType::class,
+            $this->getOptionFieldActive(
+                $race,
+                ActionEnum::ADD
+            )
+        );
+
         return $form;
     }
 
@@ -79,7 +101,7 @@ class PostForm
     private function getOptionFieldName(Races $race, $action)
     {
         //Création d'un champ option par défault
-        $option = [
+        $options = [
             "label" => "Name",
             "attr" => [
                 "placeholder" => "Saisir le nom de la race ...",
@@ -89,9 +111,52 @@ class PostForm
         //Vérifi si cet une modification
         if($action === ActionEnum::EDIT) {
             //Récupère le nom de la race à modifier
-            $option["data"] = $race->getName();
+            $options["data"] = $race->getName();
         }
 
-        return $option;
+        return $options;
+    }
+
+    /**
+     * @param Races $race
+     * @param       $action
+     * @return array
+     */
+    private function getOptionFieldContent(Races $race, $action)
+    {
+        //Création d'un champ option par défault
+        $options = [
+            "label" => "Contenu",
+            "attr" => [
+                "placeholder" => "Saisir le descriptif de la race ...",
+            ],
+            "empty_data" => null,
+        ];
+        //Vérifi si cet une modification
+        if($action === ActionEnum::EDIT) {
+            //Récupère le nom de la race à modifier
+            $options["data"] = $race->getContent();
+        }
+
+        return $options;
+    }
+
+    /**
+     * @param Races $race
+     * @param       $action
+     * @return array
+     */
+    private function getOptionFieldActive(Races $race, $action)
+    {
+        $options =[
+            "label" => "Validez pour activé l'article",
+        ];
+        //Vérifi si cet une modification
+        if($action === ActionEnum::EDIT) {
+            //Récupère le nom de la race à modifier
+            $options["data"] = $race->getActive();
+        }
+
+        return $options;
     }
 }
