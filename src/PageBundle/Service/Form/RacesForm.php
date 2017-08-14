@@ -13,7 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class PostForm
+class RacesForm
 {
     const NOM_FORM = "Races";
     const CLE_NAME = "Name";

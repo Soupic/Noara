@@ -45,17 +45,23 @@ class RacesController extends Controller
         $action
     ) {
         //appel du service qu gère le formulaire
-        $formService = $this->get("noara.page.form.post");
+        $formService = $this->get("noara.page.form.races");
+
         //Création du formulaire
         $form = $formService->newForm($race, $action);
         //Récupération de la requete
         $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid()) {
+            //Appel au service de persistance
+            $formServicePersistance = $this->get("noara.page.persistance.races");
+        }
 
         $options = [
             "form" => $form->createView(),
             "race" => $race
         ];
 
-        return $this->render("PageBundle:Post:post.html.twig", $options);
+        return $this->render("PageBundle:Races:form.html.twig", $options);
     }
 }

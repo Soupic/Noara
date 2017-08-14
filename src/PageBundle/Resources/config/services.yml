@@ -1,7 +1,14 @@
 services:
-    noara.page.form.post:
-        class: PageBundle\Service\Form\PostForm
+    noara.page.form.races:
+        class: PageBundle\Service\Form\RacesForm
         lazy: true
         shared: true
         arguments:
             - "@form.factory"
+
+    noara.page.persistance.races:
+      class: PageBundle\Service\Persistance\RacesPersistance
+      lazy: true
+      shared: true
+      arguments:
+          - "@doctrine.orm.entity_manager"
