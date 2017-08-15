@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 class RacesForm
 {
     const NOM_FORM = "Races";
-    const CLE_NAME = "Name";
+    const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";
 
@@ -64,7 +64,7 @@ class RacesForm
         Races $race
     ) {
         $form->add(
-            self::CLE_NAME,
+            self::KEY_NAME,
             TextType::class,
             $this->getOptionFieldName(
                 $race,
@@ -91,6 +91,38 @@ class RacesForm
         );
 
         return $form;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Races         $race
+     * @return Races
+     */
+    public function getRaceForAdd(
+        FormInterface $form,
+        Races $race
+    ) {
+
+        $name = $this->getDataForm($form, self::KEY_NAME);
+        $content = $this->getDataForm($form, self::KEY_CONTENT);
+        $active = $this->getDataForm($form, self::KEY_ACTIVE);
+
+        $race->setName($name);
+        $race->setContent($content);
+        $race->setActive($active);
+
+        return $race;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param               $key
+     * @return mixed
+     */
+    private function getDataForm(FormInterface $form, $key)
+    {
+        //Récupération du champ du formulaire
+        return $form[$key]->getData();
     }
 
     /**
