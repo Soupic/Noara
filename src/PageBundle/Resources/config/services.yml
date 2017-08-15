@@ -12,3 +12,10 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+
+    noara.page.dao.races:
+      class: PageBundle\Service\DAO\RacesDao
+      lazy: true
+      shared: true
+      arguments:
+          - "@doctrine.orm.entity_manager"

@@ -13,12 +13,32 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
+/**
+ * Class RacesController
+ * @package PageBundle\Controller
+ */
 class RacesController extends Controller
 {
     /**
-     * class PostController
+     * @Route("races/", name="show_races")
+     * @return Response
+     */
+    public function showAction()
+    {
+        //Appel au service de DAO
+        $raceDao = $this->get("noara.page.dao.races");
+        //Appel la méthode d'affichage de la liste
+        $races = $raceDao->getAllRaces();
+
+        return $this->render("PageBundle:Races:liste.html.twig", [
+            "races" => $races,
+        ]);
+
+    }
+
+    /**
      * @param Request $request
-     * @Route("races/", name="races")
+     * @Route("newRaces/", name="page_races")
      * @return RedirectResponse|Response
      */
     public function addAction(Request $request)
@@ -66,9 +86,10 @@ class RacesController extends Controller
             if ($action === ActionEnum::ADD) {
                 $race = $formService->getRaceForAdd($form, $race);
 
-//                $redirection = $this->redirectToRoute("races/");
+                $redirection = $this->redirectToRoute("page_races");
             }
 
+            //Appel du service de persistance pour sauvegarder la race
             $racePersistance->saveRace($race);
 
             return $redirection;
