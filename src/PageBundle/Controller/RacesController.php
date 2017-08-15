@@ -3,9 +3,11 @@
 namespace PageBundle\Controller;
 
 
+use OC\Notification\Action;
 use PageBundle\Entity\Races;
 use PageBundle\Enum\ActionEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -16,7 +18,7 @@ class RacesController extends Controller
     /**
      * class PostController
      * @param Request $request
-     * @Route("post/")
+     * @Route("races/", name="races")
      * @return RedirectResponse|Response
      */
     public function addAction(Request $request)
@@ -52,9 +54,24 @@ class RacesController extends Controller
         //Récupération de la requete
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
+        //Vérification si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
             //Appel au service de persistance
-            $formServicePersistance = $this->get("noara.page.persistance.races");
+            $racePersistance = $this->get("noara.page.persistance.races");
+
+            //Création de la redirection
+            $redirection = null;
+
+            //Si c'est un ajout
+            if ($action === ActionEnum::ADD) {
+                $race = $formService->getRaceForAdd($form, $race);
+
+//                $redirection = $this->redirectToRoute("races/");
+            }
+
+            $racePersistance->saveRace($race);
+
+            return $redirection;
         }
 
         $options = [
