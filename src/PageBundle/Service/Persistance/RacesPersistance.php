@@ -4,7 +4,7 @@ namespace PageBundle\Service\Persistance;
 
 
 use Doctrine\ORM\EntityManager;
-use PageBundle\Entity\Post;
+use PageBundle\Entity\Races;
 use PageBundle\Exception\ArchitectureException;
 
 /**
@@ -25,6 +25,10 @@ class RacesPersistance
         $this->entityManager = $entityManager;
     }
 
+    /**
+     * @param Races $race
+     * @throws ArchitectureException
+     */
     public function saveRace(Races $race)
     {
         try {
