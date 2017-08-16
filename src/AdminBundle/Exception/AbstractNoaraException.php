@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: picsou
+ * Date: 14/08/17
+ * Time: 15:19
+ */
 
 namespace AdminBundle\Exception;
 

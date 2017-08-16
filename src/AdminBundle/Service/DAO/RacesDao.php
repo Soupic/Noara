@@ -1,13 +1,13 @@
 <?php
 
-namespace PageBundle\Service\DAO;
+namespace AdminBundle\Service\DAO;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManager;
 
 /**
  * Class RacesDao
- * @package PageBundle\Service\DAO
+ * @package AdminBundle\Service\DAO
  */
 class RacesDao extends AbstractMasterDAO
 {
@@ -21,7 +21,7 @@ class RacesDao extends AbstractMasterDAO
 
     public function getAllRaces()
     {
-        $repo = $this->entity->getRepository('PageBundle:Races');
+        $repo = $this->entity->getRepository('AdminBundle:Races');
 
         $query = $repo->getAllRaces();
 

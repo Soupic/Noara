@@ -1,10 +1,10 @@
 <?php
 
-namespace PageBundle\Service\Form;
+namespace AdminBundle\Service\Form;
 
 
-use PageBundle\Entity\Races;
-use PageBundle\Enum\ActionEnum;
+use AdminBundle\Entity\Races;
+use AdminBundle\Enum\ActionEnum;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;

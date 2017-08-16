@@ -13,19 +13,4 @@ use Doctrine\ORM\Query;
  */
 class RacesRepository extends EntityRepository
 {
-    /**
-     * @return Query
-     */
-    public function getAllRaces()
-    {
-        //Création du queryBuilder
-        $qb = $this->createQueryBuilder("races");
-
-        $qb
-            ->addSelect("characters")
-            ->leftJoin("races.characters", "characters")
-        ;
-
-        return dump($qb->getQuery());
-    }
 }
