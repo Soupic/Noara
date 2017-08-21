@@ -13,6 +13,9 @@ use AdminBundle\Exception\ArchitectureException;
  */
 class PostDao extends AbstractMasterDAO
 {
+
+    const NAME_REPO = "AdminBundle:Post";
+
     /**
      * @return EntityManager
      */
@@ -28,7 +31,7 @@ class PostDao extends AbstractMasterDAO
     public function getAllPost()
     {
         try {//On récupère le bon répository
-            $repo = $this->entity->getRepository("AdminBundle:Post");
+            $repo = $this->entity->getRepository(self::NAME_REPO);
             //Appel à la méhtode du répo pour nous retourné tout les posts
             $query = $repo->getAllPost();
             //Nous retourne une tableau de collection avec le résulta
@@ -36,6 +39,29 @@ class PostDao extends AbstractMasterDAO
         } catch (\Exception $exception) {
             throw new ArchitectureException(
                 "Erreur lors de la récupération des posts",
+                "TODO",
+                $exception
+            );
+        }
+    }
+
+    /**
+     * @param int $idPost
+     * @return mixed
+     * @throws ArchitectureException
+     */
+    public function getPostById($idPost)
+    {
+        try {
+            //Appel du répository
+            $repo = $this->entity->getRepository(self::NAME_REPO);
+            //Appel de la méthode de reherche par l'ID
+            $query = $repo->getPostById($idPost);
+            //Retourne le simple résultat
+            return $query->getSingleResult();
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupéré le post par son ID",
                 "TODO",
                 $exception
             );

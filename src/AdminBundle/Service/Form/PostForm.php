@@ -49,6 +49,10 @@ class PostForm
             $form = $this->createFieldForNewForm($form, $post);
         }
 
+        if ($editPost) {
+            $form = $this->createFieldForEditForm($form, $post);
+        }
+
         return $form->getForm();
     }
 
@@ -88,7 +92,72 @@ class PostForm
         return $form;
     }
 
+    public function createFieldForEditForm(
+        FormBuilderInterface $form,
+        Post $post
+    ) {
+        $form->add(
+            self::KEY_TITLE,
+            TextType::class,
+            $this->getOptionFieldTitle(
+                $post,
+                ActionEnum::EDIT
+            )
+        );
+        $form->add(
+            self::KEY_CONTENT,
+            TextareaType::class,
+            $this->getOptionFieldContent(
+                $post,
+                ActionEnum::EDIT
+            )
+        );
+        $form->add(
+            self::KEY_DATE,
+            DateTimeType::class
+        );
+        $form->add(
+            self::KEY_ACTIVE,
+            CheckboxType::class,
+            $this->getOptionFieldActive(
+                $post,
+                ActionEnum::EDIT
+            )
+        );
+
+        return $form;
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Post          $post
+     * @return Post
+     */
     public function getPostForAdd(
+        FormInterface $form,
+        Post $post
+    ) {
+        //Récupération des champ du formulaire
+        $title = $this->getDataForm($form, self::KEY_TITLE);
+        $content = $this->getDataForm($form, self::KEY_CONTENT);
+        $date = $this->getDataForm($form, self::KEY_DATE);
+        $active = $this->getDataForm($form, self::KEY_ACTIVE);
+
+        $post->setTitle($title);
+        $post->setContent($content);
+        $post->setDate($date);
+        $post->setActive($active);
+
+        return $post;
+
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Post          $post
+     * @return Post
+     */
+    public function getPostForEdit(
         FormInterface $form,
         Post $post
     ) {

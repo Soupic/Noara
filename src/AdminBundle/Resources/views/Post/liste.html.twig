@@ -11,7 +11,7 @@
                 {% else %}
                     <div class="disabled">Désactivé</div>
                 {% endif %}
-                <div class="btnEdit"><a href="#">Modification</a></div>
+                <div class="btnEdit"><a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}">Modification</a></div>
                 <div class="btnDisabled"><a href="#"></a></div>
                 <div class="btnDelete"><a href="#">Suppression</a></div>
             </div>

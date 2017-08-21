@@ -40,3 +40,4 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+

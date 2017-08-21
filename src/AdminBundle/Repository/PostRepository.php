@@ -3,6 +3,7 @@
 namespace AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * PostRepository
@@ -23,6 +24,25 @@ class PostRepository extends EntityRepository
         $qb
             ->select("post")
         ;
+
+        return $qb->getQuery();
+    }
+
+    /**
+     * @param $idPost
+     * @return Query
+     */
+    public function getPostById($idPost)
+    {
+        //Création du query Builder
+        $qb = $this->createQueryBuilder("post");
+        //Requete qui récupère un post en fonction de son id
+        $qb
+            ->select("post")
+            ->where($qb->expr()->eq("post.id", ":idPost"))
+            ->setParameter("idPost", $idPost)
+        ;
+
         return $qb->getQuery();
     }
 }

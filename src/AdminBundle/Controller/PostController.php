@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class PostController
@@ -51,6 +52,30 @@ class PostController extends Controller
         );
     }
 
+    /**
+     * @Route(
+     *     "editPost/{idPost}",
+     *     requirements={"idPost": "\d+"},
+     *     name="admin_post_edit"
+     * )
+     * @param Request $request
+     * @param int     $idPost
+     * @return RedirectResponse|Response
+     */
+    public function editAction(Request $request, $idPost)
+    {
+        //Appel au service de DAO
+        $postDao = $this->get("noara.admin.dao.post");
+        //Récupération du post par son ID
+        $post = $postDao->getPostById($idPost);
+        //Retourne le formulaire remplis avec le post
+        return $this->managementForm(
+            $request,
+            $post,
+            ActionEnum::EDIT
+        );
+    }
+
     private function managementForm(
         Request $request,
         Post $post,
@@ -77,6 +102,10 @@ class PostController extends Controller
 
                 //Affectation de la redirection
                 $redirection = $this->redirectToRoute("new_post");
+            } else {
+                $post = $formService->getPostForEdit($form, $post);
+
+                $redirection = $this->redirectToRoute("show_post");
             }
 
             //Appel à la méthode pour sauvegarder le post
