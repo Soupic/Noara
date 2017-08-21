@@ -159,6 +159,11 @@ class RacesForm
         return $race;
     }
 
+    /**
+     * @param FormInterface $form
+     * @param Races         $race
+     * @return Races
+     */
     public function getRaceForEdit(
         FormInterface $form,
         Races $race
@@ -176,7 +181,7 @@ class RacesForm
 
     /**
      * @param FormInterface $form
-     * @param               $key
+     * @param string        $key
      * @return mixed
      */
     private function getDataForm(FormInterface $form, $key)
