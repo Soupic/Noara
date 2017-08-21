@@ -12,6 +12,8 @@ use Doctrine\ORM\EntityManager;
  */
 class RacesDao extends AbstractMasterDAO
 {
+    const NAME_REPO = "AdminBundle:Races";
+
     /**
      * @return EntityManager
      */
@@ -27,7 +29,7 @@ class RacesDao extends AbstractMasterDAO
     public function getAllRaces()
     {
         try {
-            $repo = $this->entity->getRepository('AdminBundle:Races');
+            $repo = $this->entity->getRepository(self::NAME_REPO);
 
             $query = $repo->getAllRaces();
 
@@ -49,7 +51,7 @@ class RacesDao extends AbstractMasterDAO
     public function getRaceById($idRaces)
     {
         try {
-            $repo = $this->entity->getRepository("AdminBundle:Races");
+            $repo = $this->entity->getRepository(self::NAME_REPO);
 
             $query = $repo->getRaceById($idRaces);
 
