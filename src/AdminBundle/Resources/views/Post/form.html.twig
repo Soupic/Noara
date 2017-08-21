@@ -1,6 +1,10 @@
 {% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
+    <div class="blockTitre">
+        <div class="titrePage">Articles</div>
+        <div class="btnForm"><a href="{{ path("show_posts") }}">Liste des articles</a></div>
+    </div>
     {{ form_start(form) }}
     <div class="field">
         {{ form_label(form) }}

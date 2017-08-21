@@ -2,6 +2,10 @@
 
 {% block body %}
     <div class="blockBody">
+        <div class="blockTitre">
+            <div class="titrePage">Personnages</div>
+            <div class="btnForm"><a href="{{ path("admin_characters") }}">Ajouter personnage</a></div>
+        </div>
         {% for character in characters %}
             <div class="blockContent">
                 <div class="title">{{ character.name }}</div>
@@ -13,7 +17,7 @@
                 {% endif %}
                 <div class="btnEdit"><a href="{{ path("admin_characters_edit", {"idCharacters" : character.id}) }}">Modification</a></div>
                 <div class="btnDisabled"><a href="#"></a></div>
-                <div class="btnDelete"><a href="#">Suppression</a></div>
+                <div class="btnDelete"><a href="{{ path("admin_characters_deleted", {"idCharacters" : character.id}) }}">Suppression</a></div>
             </div>
         {% endfor %}
     </div>

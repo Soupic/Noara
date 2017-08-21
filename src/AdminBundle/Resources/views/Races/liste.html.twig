@@ -1,7 +1,11 @@
-{% extends "PageBundle:Admin:layout.html.twig" %}
+{% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
     <div class="blockBody">
+        <div class="blockTitre">
+            <div class="titrePage">Races</div>
+            <div class="btnForm"><a href="{{ path("admin_races") }}">Ajouter race</a></div>
+        </div>
         {% for race in races %}
             <div class="blocKContent">
                 <div class="name">{{ race.name }}</div>

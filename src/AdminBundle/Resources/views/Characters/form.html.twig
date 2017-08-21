@@ -1,6 +1,10 @@
 {% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
+    <div class="blockTitre">
+        <div class="titrePage">Personnages</div>
+        <div class="btnForm"><a href="{{ path("show_characters") }}">Liste des personnages</a></div>
+    </div>
     {{ form_start(form) }}
     <div class="field">
         {{ form_label(form) }}

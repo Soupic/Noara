@@ -1,14 +1,18 @@
 {% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
+    <div class="blockTitre">
+        <div class="titrePage">Races</div>
+        <div class="btnForm"><a href="{{ path("show_races") }}">Liste des races</a></div>
+    </div>
     {{ form_start(form) }}
-        <div class="field">
+        <div class="field ui input">
             {{ form_label(form) }}
             {{ form_widget(form) }}
             {{ form_errors(form) }}
         </div>
         <div>
-            <button>Ajouter une race</button>
+            <button class="ui button">Ajouter une race</button>
         </div>
     {{ form_end(form) }}
 {% endblock %}
