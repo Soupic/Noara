@@ -76,6 +76,12 @@ class PostController extends Controller
         );
     }
 
+    /**
+     * @param Request $request
+     * @param Post    $post
+     * @param $action
+     * @return null|RedirectResponse|Response
+     */
     private function managementForm(
         Request $request,
         Post $post,

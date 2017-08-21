@@ -36,10 +36,15 @@ class PostForm
         $this->formFactory = $formFactory;
     }
 
+    /**
+     * @param Post $post
+     * @param      $action
+     * @return FormInterface
+     */
     public function newForm(Post $post, $action)
     {
-        $addPost = ActionEnum::ADD;
-        $editPost = ActionEnum::EDIT;
+        $addPost = $action === ActionEnum::ADD;
+        $editPost = $action === ActionEnum::EDIT;
 
         $form = $this->formFactory->createNamedBuilder(self::NAME_FORM, FormType::class, null, [
             "csrf_protection" => false,
@@ -56,6 +61,11 @@ class PostForm
         return $form->getForm();
     }
 
+    /**
+     * @param FormBuilderInterface $form
+     * @param Post                 $post
+     * @return FormBuilderInterface
+     */
     private function createFieldForNewForm(
         FormBuilderInterface $form,
         Post $post
@@ -92,6 +102,11 @@ class PostForm
         return $form;
     }
 
+    /**
+     * @param FormBuilderInterface $form
+     * @param Post                 $post
+     * @return FormBuilderInterface
+     */
     public function createFieldForEditForm(
         FormBuilderInterface $form,
         Post $post
@@ -231,11 +246,6 @@ class PostForm
 
         return $options;
     }
-//
-//    private function getOptionFieldDateTime(Post $post, $action)
-//    {
-//
-//    }
 
     /**
      * @param Post $post
