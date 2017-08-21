@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormInterface;
 
 class RacesForm
 {
-    const NAME_FORM = "Races";
+    const NAME_FORM = "Ajouter";
     const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";

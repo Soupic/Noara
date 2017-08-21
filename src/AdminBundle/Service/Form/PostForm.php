@@ -16,7 +16,7 @@ use Symfony\Component\Form\FormInterface;
 
 class PostForm
 {
-    const NAME_FORM = "Article";
+    const NAME_FORM = "Ajouter";
     const KEY_TITLE = "Titre";
     const KEY_CONTENT = "Contenu";
     const KEY_DATE = "Date";
