@@ -19,3 +19,10 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+
+    noara.admin.dao.post:
+      class: AdminBundle\Service\DAO\PostDao
+      lazy: true
+      shared: true
+      arguments:
+          - "@doctrine.orm.entity_manager"
