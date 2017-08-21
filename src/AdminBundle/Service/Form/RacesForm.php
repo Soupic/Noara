@@ -201,7 +201,7 @@ class RacesForm
             "empty_data" => null,
         ];
         //Vérifi si cet une modification
-        if($action === ActionEnum::EDIT) {
+        if ($action === ActionEnum::EDIT) {
             //Récupère le nom de la race à modifier
             $options["data"] = $race->getName();
         }
@@ -225,7 +225,7 @@ class RacesForm
             "empty_data" => null,
         ];
         //Vérifi si cet une modification
-        if($action === ActionEnum::EDIT) {
+        if ($action === ActionEnum::EDIT) {
             //Récupère le nom de la race à modifier
             $options["data"] = $race->getContent();
         }
@@ -241,11 +241,11 @@ class RacesForm
     private function getOptionFieldActive(Races $race, $action)
     {
         $options =[
-            "label" => "Validez pour activé l'article",
+            "label" => "Validez pour activé la race",
             "required" => false
         ];
         //Vérifi si cet une modification
-        if($action === ActionEnum::EDIT) {
+        if ($action === ActionEnum::EDIT) {
             //Récupère le nom de la race à modifier
             $options["data"] = $race->getActive();
         }
