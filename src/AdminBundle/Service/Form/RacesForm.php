@@ -15,7 +15,7 @@ use Symfony\Component\Form\FormInterface;
 
 class RacesForm
 {
-    const NOM_FORM = "Races";
+    const NAME_FORM = "Races";
     const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";
@@ -42,7 +42,7 @@ class RacesForm
         $editRace = $action === ActionEnum::EDIT;
 
         //Création du formulaire
-        $form = $this->formFactory->createNamedBuilder(self::NOM_FORM, FormType::class, null, [
+        $form = $this->formFactory->createNamedBuilder(self::NAME_FORM, FormType::class, null, [
             "csrf_protection" => false,
         ]);
 

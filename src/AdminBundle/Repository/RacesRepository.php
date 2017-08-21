@@ -50,5 +50,4 @@ class RacesRepository extends EntityRepository
         //Retour de la requete
         return $qb->getQuery();
     }
-
 }
