@@ -44,4 +44,22 @@ class PostPersistance
             );
         }
     }
+
+    /**
+     * @param Post $post
+     * @throws ArchitectureException
+     */
+    public function deletePost(Post $post)
+    {
+        try {
+            $this->entityManager->remove($post);
+            $this->entityManager->flush();
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de supprimer le post",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }

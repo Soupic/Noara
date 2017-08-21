@@ -13,7 +13,7 @@
                 {% endif %}
                 <div class="btnEdit"><a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}">Modification</a></div>
                 <div class="btnDisabled"><a href="#"></a></div>
-                <div class="btnDelete"><a href="#">Suppression</a></div>
+                <div class="btnDelete"><a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}">Suppression</a></div>
             </div>
         {% endfor %}
     </div>

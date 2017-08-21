@@ -77,6 +77,29 @@ class PostController extends Controller
     }
 
     /**
+     * @Route(
+     *     "deletePost/{idPost}",
+     *     requirements={"idPost" : "\d+"},
+     *     name="admin_post_deleted"
+     * )
+     * @param int $idPost
+     * @return RedirectResponse
+     */
+    public function deleteAction($idPost)
+    {
+        //Appel au service de persistance
+        $postPersistance = $this->get("noara.admin.persistance.post");
+        //Appel au service de DAO
+        $postDao = $this->get("noara.admin.dao.post");
+        //Appel à la méthode de récupération du poste par l'id
+        $post = $postDao->getPostById($idPost);
+        //Appel à la méthode de suppression
+        $postPersistance->deletePost($post);
+        //Redirection
+        return $this->redirectToRoute("show_posts");
+    }
+
+    /**
      * @param Request $request
      * @param Post    $post
      * @param $action
