@@ -73,6 +73,29 @@ class CharactersController extends Controller
     }
 
     /**
+     * @Route(
+     *     "/deleteCharacters/{idCharacters}",
+     *     requirements={"idCharacters" : "\d+"},
+     *     name="admin_characters_deleted"
+     * )
+     * @param int $idCharacters
+     * @return RedirectResponse
+     */
+    public function deleteAction($idCharacters)
+    {
+        //Appel au service de persistance
+        $charactersPersist = $this->get("noara.admin.persistance.characters");
+        //Appel au service de DAO
+        $charactersDao = $this->get("noara.admin.dao.characters");
+        //Récupération de la race par son ID
+        $characters = $charactersDao->getRaceById($idCharacters);
+        //Methode de suppression
+        $charactersPersist->deletedCharacters($characters);
+
+        return $this->redirectToRoute("show_chracters");
+    }
+
+    /**
      * @param Request      $request
      * @param Characters   $characters
      * @param              $action
@@ -100,11 +123,11 @@ class CharactersController extends Controller
 
             //Si c'est un ajout
             if ($action === ActionEnum::ADD) {
-                $characters = $formService->getRaceForAdd($form, $characters);
+                $characters = $formService->getCharactersForAdd($form, $characters);
 
                 $redirection = $this->redirectToRoute("admin_characters");
             } else {
-                $characters = $formService->getRaceForEdit($form, $characters);
+                $characters = $formService->getCharactersForEdit($form, $characters);
 
                 $redirection = $this->redirectToRoute("show_characters");
             }

@@ -28,7 +28,7 @@ class CharactersPersistance
      * @param Characters $characters
      * @throws ArchitectureException
      */
-    public function saveRace(Characters $characters)
+    public function saveCharacters(Characters $characters)
     {
         try {
             $this->entityManager->persist($characters);
@@ -46,7 +46,7 @@ class CharactersPersistance
      * @param Characters $characters
      * @throws ArchitectureException
      */
-    public function deletedRace(Characters $characters)
+    public function deletedCharacters(Characters $characters)
     {
         try {
             $this->entityManager->remove($characters);

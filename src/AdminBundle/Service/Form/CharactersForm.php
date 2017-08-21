@@ -143,7 +143,7 @@ class CharactersForm
      * @param Characters    $characters
      * @return Characters
      */
-    public function getRaceForAdd(
+    public function getCharactersForAdd(
         FormInterface $form,
         Characters $characters
     ) {
@@ -164,7 +164,7 @@ class CharactersForm
      * @param Characters    $characters
      * @return Characters
      */
-    public function getRaceForEdit(
+    public function getCharactersForEdit(
         FormInterface $form,
         Characters $characters
     ) {
@@ -201,7 +201,7 @@ class CharactersForm
         $options = [
             "label" => "Name",
             "attr" => [
-                "placeholder" => "Saisir le nom de la race ...",
+                "placeholder" => "Saisir le nom du personnage ...",
             ],
             "empty_data" => null,
         ];
@@ -225,7 +225,7 @@ class CharactersForm
         $options = [
             "label" => "Contenu",
             "attr" => [
-                "placeholder" => "Saisir le descriptif de la race ...",
+                "placeholder" => "Saisir le descriptif du personnage ...",
             ],
             "empty_data" => null,
         ];
@@ -246,7 +246,7 @@ class CharactersForm
     private function getOptionFieldActive(Characters $characters, $action)
     {
         $options =[
-            "label" => "Validez pour activé la race",
+            "label" => "Validez pour activé le personnage",
             "required" => false
         ];
         //Vérifi si cet une modification
