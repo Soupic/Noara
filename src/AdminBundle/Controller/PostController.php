@@ -34,7 +34,7 @@ class PostController extends Controller
     /**
      * @Route(
      *     "newPost/",
-     *     name ="new_post"
+     *     name ="admin_post"
      * )
      * @param Request $request
      * @return mixed
