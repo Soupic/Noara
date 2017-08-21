@@ -47,3 +47,17 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+
+    noara.admin.form.characters:
+            class: AdminBundle\Service\Form\CharactersForm
+            lazy: true
+            shared: true
+            arguments:
+                - "@form.factory"
+
+    noara.admin.persistance.characters:
+          class: AdminBundle\Service\Persistance\CharactersPersistance
+          lazy: true
+          shared: true
+          arguments:
+              - "@doctrine.orm.entity_manager"

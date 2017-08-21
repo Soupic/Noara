@@ -3,6 +3,7 @@
 namespace AdminBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * Class CharactersRepository
@@ -10,6 +11,9 @@ use Doctrine\ORM\EntityRepository;
  */
 class CharactersRepository extends EntityRepository
 {
+    /**
+     * @return Query
+     */
     public function getAllCharacters()
     {
         //Création du query Builder
@@ -20,6 +24,25 @@ class CharactersRepository extends EntityRepository
             ->select("characters")
         ;
 
+        return $qb->getQuery();
+    }
+
+    /**
+     * @param int $idCharacters
+     * @return Query
+     */
+    public function getCharactersById($idCharacters)
+    {
+        //Création du queryBuilder
+        $qb = $this->createQueryBuilder("characters");
+
+        //Récupération du personnage gràce à l'id
+        $qb
+            ->select("characters")
+            ->where($qb->expr()->eq("characters.id", ":idCharacters"))
+            ->setParameter("idCharacters", $idCharacters)
+        ;
+        //Retour de la requete
         return $qb->getQuery();
     }
 }

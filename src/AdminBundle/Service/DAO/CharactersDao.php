@@ -45,4 +45,26 @@ class CharactersDao extends AbstractMasterDAO
             );
         }
     }
+
+    /**
+     * @param int $idCharacters
+     * @return mixed
+     * @throws ArchitectureException
+     */
+    public function getRaceById($idCharacters)
+    {
+        try {
+            $repo = $this->entity->getRepository(self::NAME_REPO);
+
+            $query = $repo->getCharactersById($idCharacters);
+
+            return $query->getSingleResult();
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupérer la races par son Id",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }
