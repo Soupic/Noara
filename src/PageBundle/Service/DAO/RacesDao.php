@@ -11,20 +11,4 @@ use Doctrine\ORM\EntityManager;
  */
 class RacesDao extends AbstractMasterDAO
 {
-    /**
-     * @return EntityManager
-     */
-    public function getEntityManager()
-    {
-        return $this->entity;
-    }
-
-    public function getAllRaces()
-    {
-        $repo = $this->entity->getRepository('PageBundle:Races');
-
-        $query = $repo->getAllRaces();
-
-        return new ArrayCollection($query->getResult());
-    }
 }
