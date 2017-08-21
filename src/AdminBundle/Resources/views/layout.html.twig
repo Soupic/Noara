@@ -5,8 +5,12 @@
     <title>{% block title %}Administration Noara{% endblock %}</title>
 </head>
 <body>
-    {% block body %}
-
-    {% endblock %}
+<div class="container">
+    <div id="titrePage">
+        <div class="blkTitrePage">{% block titre_page %}{% endblock %}</div>
+        <div class="bltBoutonPage">{% block titre_bouton %}{% endblock %}</div>
+    </div>
+    {% block body %}{% endblock %}
+</div>
 </body>
 </html>
