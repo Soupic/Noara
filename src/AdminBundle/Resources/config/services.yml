@@ -26,3 +26,10 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+
+    noara.admin.form.post:
+      class: AdminBundle\Service\Form\PostForm
+      lazy: true
+      shared: true
+      arguments:
+          - "@doctrine.orm.entity_manager"
