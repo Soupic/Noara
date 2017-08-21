@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CharactersController extends Controller
 {
@@ -92,7 +93,7 @@ class CharactersController extends Controller
         //Methode de suppression
         $charactersPersist->deletedCharacters($characters);
 
-        return $this->redirectToRoute("show_chracters");
+        return $this->redirectToRoute("show_characters");
     }
 
     /**
