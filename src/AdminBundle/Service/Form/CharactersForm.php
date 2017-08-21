@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CharactersForm
 {
-    const NAME_FORM = "Characters";
+    const NAME_FORM = "Ajouter";
     const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";

@@ -61,7 +61,7 @@ class CharactersDao extends AbstractMasterDAO
             return $query->getSingleResult();
         } catch (\Exception $exception) {
             throw new ArchitectureException(
-                "Impossible de récupérer la races par son Id",
+                "Impossible de récupérer le personnage par son Id",
                 "TODO",
                 $exception
             );
