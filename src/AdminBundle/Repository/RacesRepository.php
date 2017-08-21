@@ -30,4 +30,25 @@ class RacesRepository extends EntityRepository
         //Renvoi uniquement la requete
         return $qb->getQuery();
     }
+
+    /**
+     * @param int $idRaces
+     * @return Query
+     */
+    public function getRaceById($idRaces)
+    {
+        //Création du queryBuilder
+        $qb = $this->createQueryBuilder("races");
+
+        //Récupération de la race gràce à l'id
+        $qb
+            ->addSelect("characters")
+            ->leftJoin("races.characters", "characters")
+            ->where($qb->expr()->eq("races.id", ":idRaces"))
+            ->setParameter("idRaces", $idRaces)
+        ;
+        //Retour de la requete
+        return $qb->getQuery();
+    }
+
 }

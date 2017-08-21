@@ -30,7 +30,7 @@ class RacesController extends Controller
         //Appel la méthode d'affichage de la liste
         $races = $raceDao->getAllRaces();
 
-        return $this->render("AdminBundle:", [
+        return $this->render("AdminBundle:Races:liste.html.twig", [
             "races" => $races,
         ]);
 
@@ -56,6 +56,55 @@ class RacesController extends Controller
     }
 
     /**
+     * @Route(
+     *     "/editRaces/{idRaces}",
+     *     requirements={"idRaces": "\d+"},
+     *     name="admin_races_edit"
+     * )
+     * @param Request $request
+     * @param int     $idRaces
+     * @return Response
+     */
+    public function editAction(Request $request, $idRaces)
+    {
+        //Récupération du service de DAO
+        $raceDao = $this->get("noara.admin.dao.races");
+
+        //Recherche de la race avec son id pour modification
+        $race = $raceDao->getRaceById($idRaces);
+
+        //Retourne la méthode de gestion de formulaire
+        return $this->managementForm(
+            $request,
+            $race,
+            ActionEnum::EDIT
+        );
+    }
+
+    /**
+     * @Route(
+     *     "/deleteRaces/{idRaces}",
+     *     requirements={"idRaces" : "\d+"},
+     *     name="admin_races_deleted"
+     * )
+     * @param int $idRaces
+     * @return RedirectResponse
+     */
+    public function deleteAction($idRaces)
+    {
+        //Appel au service de persistance
+        $racesPersist = $this->get("noara.admin.persistance.races");
+        //Appel au service de DAO
+        $racesDao = $this->get("noara.admin.dao.races");
+        //Récupération de la race par son ID
+        $races = $racesDao->getRaceById($idRaces);
+        //Methode de suppression
+        $racesPersist->deletedRace($races);
+
+        return $this->redirectToRoute("show_races");
+    }
+
+    /**
      * @param Request $request
      * @param Races   $race
      * @param         $action
@@ -68,7 +117,6 @@ class RacesController extends Controller
     ) {
         //appel du service qu gère le formulaire
         $formService = $this->get("noara.admin.form.races");
-
         //Création du formulaire
         $form = $formService->newForm($race, $action);
         //Récupération de la requete
@@ -87,6 +135,10 @@ class RacesController extends Controller
                 $race = $formService->getRaceForAdd($form, $race);
 
                 $redirection = $this->redirectToRoute("admin_races");
+            } else {
+                $race = $formService->getRaceForEdit($form, $race);
+
+                $redirection = $this->redirectToRoute("show_races");
             }
 
             //Appel du service de persistance pour sauvegarder la race

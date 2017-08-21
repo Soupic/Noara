@@ -47,8 +47,14 @@ class RacesForm
         ]);
 
         //Si c'est un ajout
-        if($addRace) {
+        if ($addRace) {
             $form = $this->creationFieldForNewForm($form, $race);
+        }
+
+        //Si c'est une modification
+        if ($editRace) {
+            //Création d'un formulaire avec les informations de la race
+            $form = $this->creationFieldForEditForm($form, $race);
         }
 
         return $form->getForm();
@@ -94,6 +100,45 @@ class RacesForm
     }
 
     /**
+     * @param FormBuilderInterface $form
+     * @param Races                $race
+     * @return FormBuilderInterface
+     */
+    private function creationFieldForEditForm(
+        FormBuilderInterface $form,
+        Races $race
+    ) {
+        $form->add(
+            self::KEY_NAME,
+            TextType::class,
+            $this->getOptionFieldName(
+                $race,
+                ActionEnum::EDIT
+            )
+        );
+
+        $form->add(
+            self::KEY_CONTENT,
+            TextareaType::class,
+            $this->getOptionFieldContent(
+                $race,
+                ActionEnum::EDIT
+            )
+        );
+
+        $form->add(
+            self::KEY_ACTIVE,
+            CheckboxType::class,
+            $this->getOptionFieldActive(
+                $race,
+                ActionEnum::EDIT
+            )
+        );
+
+        return $form;
+    }
+
+    /**
      * @param FormInterface $form
      * @param Races         $race
      * @return Races
@@ -103,6 +148,21 @@ class RacesForm
         Races $race
     ) {
 
+        $name = $this->getDataForm($form, self::KEY_NAME);
+        $content = $this->getDataForm($form, self::KEY_CONTENT);
+        $active = $this->getDataForm($form, self::KEY_ACTIVE);
+
+        $race->setName($name);
+        $race->setContent($content);
+        $race->setActive($active);
+
+        return $race;
+    }
+
+    public function getRaceForEdit(
+        FormInterface $form,
+        Races $race
+    ) {
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);

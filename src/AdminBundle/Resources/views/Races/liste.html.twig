@@ -11,9 +11,9 @@
                 {% else %}
                     <div class="disabled">Désactivé</div>
                 {% endif %}
-                <div class="btnEdit"></div>
+                <div class="btnEdit"><a href="{{ path("admin_races_edit", {"idRaces" : race.id}) }}">Modification</a></div>
                 <div class="btnDisabled"></div>
-                <div class="btnDelete"></div>
+                <div class="btnDelete"><a href="{{ path("admin_races_deleted", {"idRaces" : race.id}) }}">Supprimer</a></div>
             </div>
         {% endfor %}
     </div>

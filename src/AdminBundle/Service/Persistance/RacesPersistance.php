@@ -42,4 +42,22 @@ class RacesPersistance
             );
         }
     }
+
+    /**
+     * @param Races $races
+     * @throws ArchitectureException
+     */
+    public function deletedRace(Races $races)
+    {
+        try {
+            $this->entityManager->remove($races);
+            $this->entityManager->flush();
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de supprimer la race",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }
