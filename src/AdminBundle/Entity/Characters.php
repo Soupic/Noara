@@ -15,7 +15,7 @@ class Characters
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id_characters", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -42,6 +42,28 @@ class Characters
      */
     private $active;
 
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Races", mappedBy="characters")
+     *
+     */
+    private $races;
+
+    /**
+     * @return Collection
+     */
+    public function getRaces(): Collection
+    {
+        return $this->races;
+    }
+
+    /**
+     * @param Collection $races
+     */
+    public function setRaces(Collection $races)
+    {
+        $this->races = $races;
+    }
 
     /**
      * Get id
