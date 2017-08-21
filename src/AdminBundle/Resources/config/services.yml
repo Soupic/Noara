@@ -32,4 +32,11 @@ services:
       lazy: true
       shared: true
       arguments:
+          - "@form.factory"
+
+    noara.admin.persistance.post:
+      class: AdminBundle\Service\Persistance\PostPersistance
+      lazy: true
+      shared: true
+      arguments:
           - "@doctrine.orm.entity_manager"

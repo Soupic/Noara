@@ -5,16 +5,21 @@ namespace AdminBundle\Service\Form;
 
 use AdminBundle\Entity\Post;
 use AdminBundle\Enum\ActionEnum;
-use Doctrine\DBAL\Types\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 class PostForm
 {
-    const NAME_FORM = "Post";
+    const NAME_FORM = "Article";
     const KEY_TITLE = "Titre";
     const KEY_CONTENT = "Contenu";
+    const KEY_DATE = "Date";
     const KEY_ACTIVE = "Active";
 
     /**
@@ -41,8 +46,10 @@ class PostForm
         ]);
 
         if ($addPost) {
-            $form = $this->;
+            $form = $this->createFieldForNewForm($form, $post);
         }
+
+        return $form->getForm();
     }
 
     private function createFieldForNewForm(
@@ -57,6 +64,58 @@ class PostForm
                 ActionEnum::ADD
             )
         );
+        $form->add(
+            self::KEY_CONTENT,
+            TextareaType::class,
+            $this->getOptionFieldContent(
+                $post,
+                ActionEnum::ADD
+            )
+        );
+        $form->add(
+            self::KEY_DATE,
+            DateTimeType::class
+        );
+        $form->add(
+            self::KEY_ACTIVE,
+            CheckboxType::class,
+            $this->getOptionFieldActive(
+                $post,
+                ActionEnum::ADD
+            )
+        );
+
+        return $form;
+    }
+
+    public function getPostForAdd(
+        FormInterface $form,
+        Post $post
+    ) {
+        //Récupération des champ du formulaire
+        $title = $this->getDataForm($form, self::KEY_TITLE);
+        $content = $this->getDataForm($form, self::KEY_CONTENT);
+        $date = $this->getDataForm($form, self::KEY_DATE);
+        $active = $this->getDataForm($form, self::KEY_ACTIVE);
+
+        $post->setTitle($title);
+        $post->setContent($content);
+        $post->setDate($date);
+        $post->setActive($active);
+
+        return $post;
+
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param string        $key
+     * @return mixed
+     */
+    private function getDataForm(FormInterface $form, $key)
+    {
+        //Récupération du champ du formulaire
+        return $form[$key]->getData();
     }
 
     /**
@@ -103,6 +162,11 @@ class PostForm
 
         return $options;
     }
+//
+//    private function getOptionFieldDateTime(Post $post, $action)
+//    {
+//
+//    }
 
     /**
      * @param Post $post

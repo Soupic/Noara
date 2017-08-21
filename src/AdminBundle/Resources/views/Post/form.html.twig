@@ -1,0 +1,14 @@
+{% extends "AdminBundle::layout.html.twig" %}
+
+{% block body %}
+    {{ form_start(form) }}
+    <div class="field">
+        {{ form_label(form) }}
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </div>
+    <div>
+        <button>Ajouter un Article</button>
+    </div>
+    {{ form_end(form) }}
+{% endblock %}
