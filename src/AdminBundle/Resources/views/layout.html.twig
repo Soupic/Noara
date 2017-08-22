@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}Administration Noara{% endblock %}</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ asset("") }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
 </head>
 <body>
 <div class="container">
-    <div id="titrePage">
+    <div class="headerPage">
         <div class="blkTitrePage">{% block titre_page %}Administration{% endblock %}</div>
-        <div class="bltBoutonPage">{% block titre_bouton %}<a href="{{ path("admin_accueil") }}">Acceuil</a>{% endblock %}</div>
+        <div class="bltBoutonPage">{% block titre_bouton %}<a href="{{ path("admin_accueil") }}"><i class="home icon big right attached"></i></a>{% endblock %}</div>
     </div>
     {% block body %}{% endblock %}
 </div>
@@ -19,7 +20,8 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    {#<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>#}
 {% endblock %}
 
 </body>
