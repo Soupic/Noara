@@ -5,8 +5,14 @@
         <div class="titrePage">Races</div>
         <div class="btnForm"><a href="{{ path("show_races") }}">Liste des races</a></div>
     </div>
-    {{ form_start(form) }}
-        <div class="field ui input">
+            {{ form_start(form, {"attr":
+                {
+                    "class" : "ui form",
+                    "novalidate" : "novalidate",
+                }
+            })
+            }}
+        <div class="field">
             {{ form_label(form) }}
             {{ form_widget(form) }}
             {{ form_errors(form) }}

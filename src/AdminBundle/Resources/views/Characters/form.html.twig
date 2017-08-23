@@ -5,7 +5,13 @@
         <div class="titrePage">Personnages</div>
         <div class="btnForm"><a href="{{ path("show_characters") }}">Liste des personnages</a></div>
     </div>
-    {{ form_start(form) }}
+    {{ form_start(form, {"attr":
+        {
+            "class" : "ui form",
+            "novalidate" : "novalidate",
+        }
+    })
+    }}
     <div class="field">
         {{ form_label(form) }}
         {{ form_widget(form) }}
