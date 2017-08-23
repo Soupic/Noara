@@ -3,9 +3,14 @@
 namespace AdminBundle\Service\Form;
 
 
+use AdminBundle\Entity\Characters;
 use AdminBundle\Entity\Races;
 use AdminBundle\Enum\ActionEnum;
+use Doctrine\ORM\EntityRepository;
+use OC\Notification\Action;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -19,6 +24,8 @@ class RacesForm
     const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";
+    const KEY_CHARACTERS = "Personnages";
+    const KEY_FILES = "Fichier";
 
     /**
      * @var FormFactoryInterface
@@ -96,6 +103,24 @@ class RacesForm
             )
         );
 
+        $form->add(
+            self::KEY_CHARACTERS,
+            EntityType::class,
+            $this->getOptionFieldCharacters(
+                $race,
+                ActionEnum::ADD
+            )
+        );
+
+        $form->add(
+            self::KEY_FILES,
+            CollectionType::class,
+            $this->getOptionFieldFiles(
+                $race,
+                ActionEnum::ADD
+            )
+        );
+
         return $form;
     }
 
@@ -130,6 +155,24 @@ class RacesForm
             self::KEY_ACTIVE,
             CheckboxType::class,
             $this->getOptionFieldActive(
+                $race,
+                ActionEnum::EDIT
+            )
+        );
+
+        $form->add(
+            self::KEY_CHARACTERS,
+            EntityType::class,
+            $this->getOptionFieldCharacters(
+                $race,
+                ActionEnum::EDIT
+            )
+        );
+
+        $form->add(
+            self::KEY_FILES,
+            CollectionType::class,
+            $this->getOptionFieldFiles(
                 $race,
                 ActionEnum::EDIT
             )
@@ -256,5 +299,39 @@ class RacesForm
         }
 
         return $options;
+    }
+
+    /**
+     * @param Races $race
+     * @param       $action
+     * @return array
+     */
+    private function getOptionFieldCharacters(Races $race, $action)
+    {
+        $options = [
+            "label" => "Sélectionnez un personnage",
+            "class" => Characters::class,
+            "empty_data" => null,
+            "query_builder" => function (EntityRepository $entityRepository) {
+                $queryBuilder = $entityRepository->createQueryBuilder('char');
+                $queryBuilder
+                    ->addOrderBy("char.name", "ASC")
+                ;
+            },
+        ];
+
+        if ($action === ActionEnum::EDIT) {
+            //Récupération du champ data du formulaire
+            $options["data"] = $race->getCharacters();
+        }
+
+        return $options;
+    }
+
+    private function getOptionFieldFiles(Races $race, $action)
+    {
+        $options = [
+            "entry_type" => MediaType
+        ];
     }
 }
