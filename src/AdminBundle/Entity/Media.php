@@ -3,6 +3,7 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Media
@@ -15,7 +16,7 @@ class Media
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id_media", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -41,6 +42,24 @@ class Media
      * @ORM\Column(name="type", type="string", length=10, unique=true)
      */
     private $type;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Characters", mappedBy="media")
+     */
+    private $characters;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Races", mappedBy="media")
+     */
+    private $races;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity="Post", mappedBy="media")
+     */
+    private $post;
 
 
     /**
@@ -123,6 +142,54 @@ class Media
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getCharacters(): Collection
+    {
+        return $this->characters;
+    }
+
+    /**
+     * @param Collection $characters
+     */
+    public function setCharacters(Collection $characters)
+    {
+        $this->characters = $characters;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getRaces(): Collection
+    {
+        return $this->races;
+    }
+
+    /**
+     * @param Collection $races
+     */
+    public function setRaces(Collection $races)
+    {
+        $this->races = $races;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getPost(): Collection
+    {
+        return $this->post;
+    }
+
+    /**
+     * @param Collection $post
+     */
+    public function setPost(Collection $post)
+    {
+        $this->post = $post;
     }
 }
 

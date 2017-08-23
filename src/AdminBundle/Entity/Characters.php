@@ -3,6 +3,9 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\Collection;
+use AdminBundle\Entity\Media;
 
 /**
  * Characters
@@ -48,6 +51,22 @@ class Characters
      *
      */
     private $races;
+
+    /**
+     * @var Media
+     * @JMS\Type("AdminBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="characters")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id_media")
+     */
+    private $media;
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return "{$this->getName()}";
+    }
 
     /**
      * @return Collection
@@ -145,6 +164,22 @@ class Characters
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getMedia(): Media
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param Media $media
+     */
+    public function setMedia(Media $media)
+    {
+        $this->media = $media;
     }
 }
 

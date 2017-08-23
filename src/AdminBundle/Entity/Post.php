@@ -3,6 +3,8 @@
 namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Post
@@ -15,7 +17,7 @@ class Post
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id_post", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -48,6 +50,14 @@ class Post
      * @ORM\Column(name="active", type="boolean")
      */
     private $active;
+
+    /**
+     * @var Media
+     * @JMS\Type("AdminBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="races")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id_media")
+     */
+    private $media;
 
 
     /**
@@ -154,6 +164,22 @@ class Post
     public function getActive()
     {
         return $this->active;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getMedia(): Media
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param Media $media
+     */
+    public function setMedia(Media $media)
+    {
+        $this->media = $media;
     }
 }
 

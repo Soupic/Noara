@@ -4,6 +4,8 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Doctrine\Common\Collections\Collection;
+use AdminBundle\Entity\Media;
 
 /**
  * Races
@@ -50,6 +52,14 @@ class Races
      * @ORM\JoinColumn(name="characters_id", referencedColumnName="id_characters")
      */
     private $characters;
+
+    /**
+     * @var Media
+     * @JMS\Type("AdminBundle\Entity\Media")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="races")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id_media")
+     */
+    private $media;
 
 
     /**
@@ -148,6 +158,22 @@ class Races
     public function setCharacters($characters)
     {
         $this->characters = $characters;
+    }
+
+    /**
+     * @return Media
+     */
+    public function getMedia(): Media
+    {
+        return $this->media;
+    }
+
+    /**
+     * @param Media $media
+     */
+    public function setMedia(Media $media)
+    {
+        $this->media = $media;
     }
 }
 
