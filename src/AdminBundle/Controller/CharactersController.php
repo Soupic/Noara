@@ -134,7 +134,7 @@ class CharactersController extends Controller
             }
 
             //Appel du service de persistance pour sauvegarder la race
-            $charactersPersistance->saveRace($characters);
+            $charactersPersistance->saveCharacters($characters);
 
             return $redirection;
         }
