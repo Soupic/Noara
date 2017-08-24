@@ -133,6 +133,7 @@ class RacesController extends Controller
             //Si c'est un ajout
             if ($action === ActionEnum::ADD) {
                 $race = $formService->getRaceForAdd($form, $race);
+                dump($race);die();
 
                 $redirection = $this->redirectToRoute("admin_races");
             } else {

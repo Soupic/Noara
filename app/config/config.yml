@@ -69,3 +69,11 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        media_files:
+            uri_prefix: /mediaFiles/
+            upload_destination: '%kernel.root_dir%/../web/public/files/'
+            namer: vich_uploader.namer_uniqid

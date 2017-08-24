@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RacesForm
 {
@@ -25,7 +26,7 @@ class RacesForm
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";
     const KEY_CHARACTERS = "Personnages";
-    const KEY_FILES = "Fichier";
+    const KEY_FILES = "mediaFile";
 
     /**
      * @var FormFactoryInterface
@@ -114,11 +115,7 @@ class RacesForm
 
         $form->add(
             self::KEY_FILES,
-            CollectionType::class,
-            $this->getOptionFieldFiles(
-                $race,
-                ActionEnum::ADD
-            )
+            VichFileType::class
         );
 
         return $form;
@@ -328,10 +325,10 @@ class RacesForm
         return $options;
     }
 
-    private function getOptionFieldFiles(Races $race, $action)
-    {
-        $options = [
-            "entry_type" => MediaType
-        ];
-    }
+//    private function getOptionFieldFiles(Races $race, $action)
+//    {
+//        $options = [
+//            "entry_type" => MediaType
+//        ];
+//    }
 }

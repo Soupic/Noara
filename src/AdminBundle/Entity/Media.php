@@ -6,14 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use SDVI\Core\CommonBundle\Interfaces\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * Media
  *
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\MediaRepository")
+ * @Vich\Uploadable
  */
-class Media implements FileInterface
+class Media
 {
     const REGEX = "/[\/\\\]+/";
 
@@ -29,69 +31,23 @@ class Media implements FileInterface
     private $id;
 
     /**
-     * @Assert\File(
-     *     mimeTypes={"image/jpeg", "image/png", "application/pdf"},
-     *     mimeTypesMessage = "format autorisés : .jpeg, .png, .pdf"
-     * )
+     * @Vich\UploadableField(mapping="media", fileNameProperty="mediaFileName")
+     * @var File
      */
-    private $nonUploadedFile;
+    private $mediaFile;
 
     /**
-     * @var bool
-     *
-     * @ORM\Column(name="safe_delete", type="boolean")
-     */
-    private $safeDelete = false;
-
-    /**
+     * @ORM\Column(type="string", length=255)
      * @var string
-     *
-     * @ORM\Column(name="asset_path", type="string", length=255)
      */
-    private $assetPath;
+    private $mediaName;
 
     /**
-     * @var int
-     * @Assert\Type("integer")
+     * @ORM\Column(type="datetime")
      *
-     * @ORM\Column(name="root_dir_enum", type="integer", nullable=false)
+     * @var \DateTime
      */
-    private $rootDirEnum;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", length=255)
-     */
-    private $path;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="orignial_name", type="string", length=255)
-     */
-    private $originalName;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="extension", type="string", length=255)
-     */
-    private $extension;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=10, unique=true)
-     */
-    private $type;
+    private $updatedAt;
 
     /**
      * @var Collection
@@ -128,147 +84,58 @@ class Media implements FileInterface
     }
 
     /**
-     * @return mixed
+     * @return File
      */
-    public function getNonUploadedFile()
+    public function getMediaFile(): File
     {
-        return $this->nonUploadedFile;
+        return $this->mediaFile;
     }
 
     /**
-     * @param UploadedFile $nonUploadedFile
+     * @param File $mediaFile
+     * @return $this
      */
-    public function setNonUploadedFile(UploadedFile $nonUploadedFile)
+    public function setMediaFile(File $mediaFile)
     {
-        $this->nonUploadedFile = $nonUploadedFile;
-    }
+        $this->mediaFile = $mediaFile;
 
-    /**
-     * @return bool
-     */
-    public function isSafeDelete(): bool
-    {
-        return $this->safeDelete;
-    }
+        if ($mediaFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
 
-    /**
-     * @param bool $safeDelete
-     */
-    public function setSafeDelete(bool $safeDelete)
-    {
-        $this->safeDelete = $safeDelete;
+        return $this;
     }
 
     /**
      * @return string
      */
-    public function getAssetPath(): string
+    public function getMediaName(): string
     {
-        return $this->assetPath;
+        return $this->mediaName;
     }
 
     /**
-     * @param string $assetPath
+     * @param string $mediaName
      */
-    public function setAssetPath(string $assetPath)
+    public function setMediaName(string $mediaName)
     {
-        $this->assetPath = $assetPath;
+        $this->mediaName = $mediaName;
     }
 
     /**
-     * @return int
+     * @return \DateTime
      */
-    public function getRootDirEnum(): int
+    public function getUpdatedAt(): \DateTime
     {
-        return $this->rootDirEnum;
+        return $this->updatedAt;
     }
 
     /**
-     * @param int $rootDirEnum
+     * @param \DateTime $updatedAt
      */
-    public function setRootDirEnum(int $rootDirEnum)
+    public function setUpdatedAt(\DateTime $updatedAt)
     {
-        $this->rootDirEnum = $rootDirEnum;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
-    {
-        return $this->path;
-    }
-
-    /**
-     * @param string $path
-     */
-    public function setPath(string $path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * @return string
-     */
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName(string $name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     * @return string
-     */
-    public function getOriginalName(): string
-    {
-        return $this->originalName;
-    }
-
-    /**
-     * @param string $originalName
-     */
-    public function setOriginalName(string $originalName)
-    {
-        $this->originalName = $originalName;
-    }
-
-    /**
-     * @return string
-     */
-    public function getExtension(): string
-    {
-        return $this->extension;
-    }
-
-    /**
-     * @param string $extension
-     */
-    public function setExtension(string $extension)
-    {
-        $this->extension = $extension;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param string $type
-     */
-    public function setType(string $type)
-    {
-        $this->type = $type;
+        $this->updatedAt = $updatedAt;
     }
 
     /**
