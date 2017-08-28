@@ -71,7 +71,7 @@ class Characters
     /**
      * @return Collection
      */
-    public function getRaces(): Collection
+    public function getRaces()
     {
         return $this->races;
     }
@@ -169,7 +169,7 @@ class Characters
     /**
      * @return Media
      */
-    public function getMedia(): Media
+    public function getMedia()
     {
         return $this->media;
     }

@@ -4,23 +4,17 @@ namespace AdminBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
-use SDVI\Core\CommonBundle\Interfaces\FileInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Media
  *
  * @ORM\Table(name="media")
  * @ORM\Entity(repositoryClass="AdminBundle\Repository\MediaRepository")
- * @Vich\Uploadable
  */
 class Media
 {
-    const REGEX = "/[\/\\\]+/";
-
-    const FORMAT_IMG_ALLOWED = ["jpeg", "png"];
-
     /**
      * @var int
      *
@@ -31,23 +25,23 @@ class Media
     private $id;
 
     /**
-     * @Vich\UploadableField(mapping="media", fileNameProperty="mediaFileName")
-     * @var File
+     * @ORM\Column(type="string", name="url", length=255)
      */
-    private $mediaFile;
+    private $url;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="alt", type="string", length=255)
      * @var string
      */
-    private $mediaName;
+    private $alt;
 
     /**
-     * @ORM\Column(type="datetime")
-     *
-     * @var \DateTime
+     * @return mixed
      */
-    private $updatedAt;
+    private $file;
+
+    // Attribut pour retenir le nom du fichier
+    private $tempFileName;
 
     /**
      * @var Collection
@@ -70,7 +64,7 @@ class Media
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -84,64 +78,127 @@ class Media
     }
 
     /**
-     * @return File
+     * @return mixed
      */
-    public function getMediaFile(): File
+    public function getUrl()
     {
-        return $this->mediaFile;
+        return $this->url;
     }
 
     /**
-     * @param File $mediaFile
-     * @return $this
+     * @param mixed $url
      */
-    public function setMediaFile(File $mediaFile)
+    public function setUrl($url)
     {
-        $this->mediaFile = $mediaFile;
-
-        if ($mediaFile) {
-            $this->updatedAt = new \DateTimeImmutable();
-        }
-
-        return $this;
+        $this->url = $url;
     }
 
     /**
      * @return string
      */
-    public function getMediaName(): string
+    public function getAlt()
     {
-        return $this->mediaName;
+        return $this->alt;
     }
 
     /**
-     * @param string $mediaName
+     * @param string $alt
      */
-    public function setMediaName(string $mediaName)
+    public function setAlt($alt)
     {
-        $this->mediaName = $mediaName;
+        $this->alt = $alt;
     }
 
     /**
-     * @return \DateTime
+     * @return mixed
      */
-    public function getUpdatedAt(): \DateTime
+    public function getFile()
     {
-        return $this->updatedAt;
+        return $this->file;
     }
 
     /**
-     * @param \DateTime $updatedAt
+     * @var UploadedFile
+     * @param mixed $file
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setFile(UploadedFile $file)
     {
-        $this->updatedAt = $updatedAt;
+        $this->file = $file;
+
+        if (null !== $this->url) {
+            $this->tempFileName = $this->url;
+
+            $this->url = null;
+            $this->alt =  null;
+        }
+    }
+
+    /**
+     * @ORM\PrePresist()
+     * @ORM\PreUpdate()
+     */
+    public function preUpload()
+    {
+        if (null === $this->file) {
+            return;
+        }
+
+        $this->url = $this->file->guessExtension();
+
+        $this->alr = $this->file->getCientOriginalName();
+    }
+
+    public function upload()
+    {
+        if (null === $this->file )
+        {
+            return;
+        }
+
+        if (null !== $this->tempFileName) {
+            $oldFile = $this->getUploadRootDir()."/".$this->id.".".$this->tempFileName;
+            if (file_exists($oldFile)) {
+                unlink($oldFile);
+            }
+        }
+
+        $this->file->move(
+            $this->getUploadRootDir(),
+            $this->id.".".$this->url
+        );
+    }
+
+    public function preRemoveUpload()
+    {
+        $this->tempFileName = $this->getUploadRootDir()."/".$this->id.".".$this->url;
+    }
+
+    public function removeUpload()
+    {
+        if (file_exists($this->tempFileName)) {
+            unlink($this->tempFileName);
+        }
+    }
+
+    public function getUploadDir()
+    {
+        return "public/files";
+    }
+
+    protected function getUploadRootDir()
+    {
+        return __DIR__."/../../../web/".$this->getUploadDir();
+    }
+
+    public function getWebPath()
+    {
+        return $this->getUploadDir()."/".$this->getId().".".$this->getUrl();
     }
 
     /**
      * @return Collection
      */
-    public function getCharacters(): Collection
+    public function getCharacters()
     {
         return $this->characters;
     }
@@ -157,7 +214,7 @@ class Media
     /**
      * @return Collection
      */
-    public function getRaces(): Collection
+    public function getRaces()
     {
         return $this->races;
     }
@@ -173,7 +230,7 @@ class Media
     /**
      * @return Collection
      */
-    public function getPost(): Collection
+    public function getPost()
     {
         return $this->post;
     }

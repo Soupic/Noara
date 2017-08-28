@@ -161,17 +161,17 @@ class Races
     }
 
     /**
-     * @return Media
+     * @return int
      */
-    public function getMedia(): Media
+    public function getMedia()
     {
         return $this->media;
     }
 
     /**
-     * @param Media $media
+     * @param int $media
      */
-    public function setMedia(Media $media)
+    public function setMedia($media)
     {
         $this->media = $media;
     }

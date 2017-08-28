@@ -3,7 +3,6 @@
 namespace AdminBundle\Controller;
 
 
-use OC\Notification\Action;
 use AdminBundle\Entity\Races;
 use AdminBundle\Enum\ActionEnum;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -133,7 +132,6 @@ class RacesController extends Controller
             //Si c'est un ajout
             if ($action === ActionEnum::ADD) {
                 $race = $formService->getRaceForAdd($form, $race);
-                dump($race);die();
 
                 $redirection = $this->redirectToRoute("admin_races");
             } else {
@@ -143,6 +141,7 @@ class RacesController extends Controller
             }
 
             //Appel du service de persistance pour sauvegarder la race
+//            dump($race);die();
             $racePersistance->saveRace($race);
 
             return $redirection;

@@ -7,7 +7,6 @@ use AdminBundle\Entity\Characters;
 use AdminBundle\Entity\Races;
 use AdminBundle\Enum\ActionEnum;
 use Doctrine\ORM\EntityRepository;
-use OC\Notification\Action;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -17,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Vich\UploaderBundle\Form\Type\VichFileType;
+use AdminBundle\Form\MediaFileType;
 
 class RacesForm
 {
@@ -115,7 +114,7 @@ class RacesForm
 
         $form->add(
             self::KEY_FILES,
-            VichFileType::class
+            MediaFileType::class
         );
 
         return $form;
@@ -191,10 +190,14 @@ class RacesForm
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
+        $character = $this->getDataForm($form, self::KEY_CHARACTERS);
+        $mediaFile = $this->getDataForm($form, self::KEY_FILES);
 
         $race->setName($name);
         $race->setContent($content);
         $race->setActive($active);
+        $race->setCharacters($character);
+        $race->setMedia($mediaFile);
 
         return $race;
     }

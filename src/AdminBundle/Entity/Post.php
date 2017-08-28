@@ -169,7 +169,7 @@ class Post
     /**
      * @return Media
      */
-    public function getMedia(): Media
+    public function getMedia()
     {
         return $this->media;
     }
