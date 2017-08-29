@@ -4,6 +4,7 @@ namespace AdminBundle\Service\Form;
 
 
 use AdminBundle\Entity\Characters;
+use AdminBundle\Entity\Media;
 use AdminBundle\Entity\Races;
 use AdminBundle\Enum\ActionEnum;
 use Doctrine\ORM\EntityRepository;
@@ -187,17 +188,31 @@ class RacesForm
         Races $race
     ) {
 
+        /**
+         * @var Media
+         */
+        $media = new Media();
+
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
         $character = $this->getDataForm($form, self::KEY_CHARACTERS);
         $mediaFile = $this->getDataForm($form, self::KEY_FILES);
+        $file = $mediaFile["file"];
+
+
+        if ($file !== null) {
+
+            $media->setFile($file);
+            $media->preUpload();
+            $media->upload();
+            $race->setMedia($media);
+        }
 
         $race->setName($name);
         $race->setContent($content);
         $race->setActive($active);
         $race->setCharacters($character);
-        $race->setMedia($mediaFile);
 
         return $race;
     }
@@ -211,13 +226,31 @@ class RacesForm
         FormInterface $form,
         Races $race
     ) {
+        /**
+         * @var Media
+         */
+        $media = new Media();
+
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
+        $character = $this->getDataForm($form, self::KEY_CHARACTERS);
+        $mediaFile = $this->getDataForm($form, self::KEY_FILES);
+        $file = $mediaFile["file"];
+
+
+        if ($file !== null) {
+
+            $media->setFile($file);
+            $media->preUpload();
+            $media->upload();
+            $race->setMedia($media);
+        }
 
         $race->setName($name);
         $race->setContent($content);
         $race->setActive($active);
+        $race->setCharacters($character);
 
         return $race;
     }

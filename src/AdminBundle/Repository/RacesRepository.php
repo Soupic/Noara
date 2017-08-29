@@ -23,8 +23,12 @@ class RacesRepository extends EntityRepository
 
         //Récupération des personnages lié à la race
         $qb
-            ->addSelect("characters")
+            ->addSelect(
+                "characters",
+                "media"
+                )
             ->leftJoin("races.characters", "characters")
+            ->leftJoin("races.media", "media")
         ;
 
         //Renvoi uniquement la requete
@@ -42,8 +46,12 @@ class RacesRepository extends EntityRepository
 
         //Récupération de la race gràce à l'id
         $qb
-            ->addSelect("characters")
+            ->addSelect(
+                "characters",
+                "media"
+            )
             ->leftJoin("races.characters", "characters")
+            ->leftJoin("race.media", "media")
             ->where($qb->expr()->eq("races.id", ":idRaces"))
             ->setParameter("idRaces", $idRaces)
         ;

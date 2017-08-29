@@ -31,16 +31,16 @@ class RacesPersistance
      */
     public function saveRace(Races $race)
     {
-        try {
+//        try {
             $this->entityManager->persist($race);
             $this->entityManager->flush();
-        } catch ( \Exception $exception) {
-            throw new ArchitectureException(
-                "Impossible de sauvegarder la race",
-                "TODO",
-                $exception
-            );
-        }
+////        } catch ( \Exception $exception) {
+//            throw new ArchitectureException(
+//                "Impossible de sauvegarder la race",
+//                "TODO",
+//                $exception
+//            );
+//        }
     }
 
     /**

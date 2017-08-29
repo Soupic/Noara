@@ -28,19 +28,19 @@ class RacesDao extends AbstractMasterDAO
      */
     public function getAllRaces()
     {
-        try {
+//        try {
             $repo = $this->entity->getRepository(self::NAME_REPO);
 
             $query = $repo->getAllRaces();
 
             return new ArrayCollection($query->getResult());
-        } catch (\Exception $exception) {
-            throw new ArchitectureException(
-                "Erreur lors de la récupération de la liste des races",
-                "TODO",
-                $exception
-            );
-        }
+//        } catch (\Exception $exception) {
+//            throw new ArchitectureException(
+//                "Erreur lors de la récupération de la liste des races",
+//                "TODO",
+//                $exception
+//            );
+//        }
     }
 
     /**

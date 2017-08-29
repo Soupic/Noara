@@ -125,6 +125,7 @@ class Media
     {
         $this->file = $file;
 
+
         if (null !== $this->url) {
             $this->tempFileName = $this->url;
 
@@ -145,12 +146,12 @@ class Media
 
         $this->url = $this->file->guessExtension();
 
-        $this->alr = $this->file->getCientOriginalName();
+        $this->alt = $this->file->getClientOriginalName();
     }
 
     public function upload()
     {
-        if (null === $this->file )
+        if (null === $this->file)
         {
             return;
         }
@@ -168,11 +169,17 @@ class Media
         );
     }
 
+    /**
+     * @ORM\PreRemove()
+     */
     public function preRemoveUpload()
     {
         $this->tempFileName = $this->getUploadRootDir()."/".$this->id.".".$this->url;
     }
 
+    /**
+     * @ORM\PostRemove()
+     */
     public function removeUpload()
     {
         if (file_exists($this->tempFileName)) {
