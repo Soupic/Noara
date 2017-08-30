@@ -51,7 +51,7 @@ class RacesRepository extends EntityRepository
                 "media"
             )
             ->leftJoin("races.characters", "characters")
-            ->leftJoin("race.media", "media")
+            ->leftJoin("races.media", "media")
             ->where($qb->expr()->eq("races.id", ":idRaces"))
             ->setParameter("idRaces", $idRaces)
         ;

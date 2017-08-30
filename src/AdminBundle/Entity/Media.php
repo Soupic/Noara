@@ -36,6 +36,12 @@ class Media
     private $alt;
 
     /**
+     * @ORM\Column(name="uniqName", type="string", length=255)
+     * @var string
+     */
+    private $uniqName;
+
+    /**
      * @return mixed
      */
     private $file;
@@ -110,6 +116,22 @@ class Media
     }
 
     /**
+     * @return string
+     */
+    public function getUniqName()
+    {
+        return $this->uniqName;
+    }
+
+    /**
+     * @param string $uniqName
+     */
+    public function setUniqName($uniqName)
+    {
+        $this->uniqName = $uniqName;
+    }
+
+    /**
      * @return mixed
      */
     public function getFile()
@@ -126,6 +148,7 @@ class Media
         $this->file = $file;
 
 
+//        dump($file);die();
         if (null !== $this->url) {
             $this->tempFileName = $this->url;
 
@@ -163,9 +186,10 @@ class Media
             }
         }
 
+//        dump($this->id);die();
         $this->file->move(
             $this->getUploadRootDir(),
-            $this->id.".".$this->url
+            $this->uniqName.".".$this->url
         );
     }
 
@@ -174,7 +198,7 @@ class Media
      */
     public function preRemoveUpload()
     {
-        $this->tempFileName = $this->getUploadRootDir()."/".$this->id.".".$this->url;
+        $this->tempFileName = $this->getUploadRootDir()."/".$this->uniqName.".".$this->url;
     }
 
     /**
@@ -199,7 +223,7 @@ class Media
 
     public function getWebPath()
     {
-        return $this->getUploadDir()."/".$this->getId().".".$this->getUrl();
+        return $this->getUploadDir()."/".$this->getUniqName().".".$this->getUrl();
     }
 
     /**
@@ -250,6 +274,10 @@ class Media
         $this->post = $post;
     }
 
+    public function uniqName()
+    {
+        return $this->setUniqName(uniqid());
+    }
 
 }
 

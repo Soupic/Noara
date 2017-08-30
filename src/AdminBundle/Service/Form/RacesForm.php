@@ -115,7 +115,11 @@ class RacesForm
 
         $form->add(
             self::KEY_FILES,
-            MediaFileType::class
+            CollectionType::class,
+            $this->getOptionFieldFiles(
+                $race,
+                ActionEnum::ADD
+            )
         );
 
         return $form;
@@ -168,11 +172,11 @@ class RacesForm
 
         $form->add(
             self::KEY_FILES,
-            CollectionType::class,
-            $this->getOptionFieldFiles(
-                $race,
-                ActionEnum::EDIT
-            )
+            MediaFileType::class
+//            $this->getOptionFieldFiles(
+//                $race,
+//                ActionEnum::EDIT
+//            )
         );
 
         return $form;
@@ -205,6 +209,7 @@ class RacesForm
 
             $media->setFile($file);
             $media->preUpload();
+            $media->uniqName();
             $media->upload();
             $race->setMedia($media);
         }
@@ -243,6 +248,7 @@ class RacesForm
 
             $media->setFile($file);
             $media->preUpload();
+            $media->uniqName();
             $media->upload();
             $race->setMedia($media);
         }
@@ -361,10 +367,17 @@ class RacesForm
         return $options;
     }
 
-//    private function getOptionFieldFiles(Races $race, $action)
-//    {
-//        $options = [
-//            "entry_type" => MediaType
-//        ];
-//    }
+    private function getOptionFieldFiles(Races $race, $action)
+    {
+        $options = [
+            "entry_type" => MediaFileType::class,
+        ];
+
+        if ($action === ActionEnum::EDIT) {
+            //Récupération du champ du formulaire
+            $options["data"] = $race->getMedia();
+        }
+
+        return $options;
+    }
 }

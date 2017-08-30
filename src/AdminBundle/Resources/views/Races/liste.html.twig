@@ -15,10 +15,11 @@
                 {% else %}
                     <div class="disabled">Désactivé</div>
                 {% endif %}
-                {{ if race.media }}
+                {% if race.media is not null %}
                     <div class="img">
-                        <div class="btn img">Affichier</div>
+                        <img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}">
                     </div>
+                {% endif %}
                 <div class="btnEdit"><a href="{{ path("admin_races_edit", {"idRaces" : race.id}) }}">Modification</a></div>
                 <div class="btnDisabled"></div>
                 <div class="btnDelete"><a href="{{ path("admin_races_deleted", {"idRaces" : race.id}) }}">Supprimer</a></div>

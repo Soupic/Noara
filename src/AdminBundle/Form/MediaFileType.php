@@ -6,6 +6,7 @@ namespace AdminBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
 * Class MediaFileType
@@ -13,21 +14,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 */
 class MediaFileType extends AbstractType
 {
-//   /**
-//    * @var FileService
-//    */
-//   private $fileService;
-//
-//    /**
-//    * MediaFileType constructor.
-//    * @param FileService $fileService
-//    */
-//   public function __construct(FileService $fileService)
-//   {
-//       $this->fileService = $fileService;
-//   }
-
-   public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
    {
        $builder
            ->add(
@@ -35,6 +26,9 @@ class MediaFileType extends AbstractType
            );
    }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
    public function configOptions(OptionsResolver $resolver)
    {
    		$resolver->setDefaults(array(
