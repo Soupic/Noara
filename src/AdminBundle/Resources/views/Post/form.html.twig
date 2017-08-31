@@ -1,10 +1,6 @@
 {% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
-    <div class="blockTitre">
-        <div class="titrePage">Articles</div>
-        <div class="btnForm"><a href="{{ path("show_posts") }}">Liste des articles</a></div>
-    </div>
     {{ form_start(form, {"attr":
         {
             "class" : "ui form",
@@ -12,13 +8,55 @@
         }
     })
     }}
-    <div class="field">
-        {{ form_label(form) }}
-        {{ form_widget(form) }}
-        {{ form_errors(form) }}
+    <div class="blockTitre">
+        <div class="titrePage">Articles</div>
+        <div class="btnForm"><a href="{{ path("show_posts") }}">Liste des articles</a></div>
     </div>
-    <div>
-        <button>Ajouter un Article</button>
+    <div class="ui padded attached segment">
+        <div class="three fields">
+            <div class="field">
+                {{ form_label(form[key_title]) }}
+                {{ form_widget(form[key_title]) }}
+                {{ form_errors(form[key_title]) }}
+            </div>
+            <div class="field">
+                {{ form_label(form[key_date]) }}
+                {{ form_widget(form[key_date]) }}
+                {{ form_errors(form[key_date]) }}
+            </div>
+            <div class="field">
+                {{ form_label(form[key_active]) }}
+                {{ form_widget(form[key_active]) }}
+                {{ form_errors(form[key_active]) }}
+            </div>
+            <div class="field">
+                {{ form_label(form[key_content]) }}
+                {{ form_widget(form[key_content]) }}
+                {{ form_errors(form[key_content]) }}
+            </div>
+            {% if post.media is not null %}
+                <div class="field">
+                    {{ form_label(form[key_files]) }}
+                    {{ form_widget(form[key_files]) }}
+                    {{ form_errors(form[key_files]) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="fields aes-btn-bottom">
+        {#<div class="eight wide field">#}
+        {#<a#}
+        {#class="ui button massive fluid center aligned"#}
+        {#href="{{ path('systemetache_tache_liste') }}">#}
+        {#Annuler#}
+        {#</a>#}
+        {#</div>#}
+        <div class="eight wide field">
+            <button class="ui submit massive button center aligned positive fluid"
+                    id="form_validate">
+                Valider
+            </button>
+        </div>
     </div>
     {{ form_end(form) }}
 {% endblock %}

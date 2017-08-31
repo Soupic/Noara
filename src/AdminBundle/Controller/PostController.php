@@ -4,6 +4,7 @@ namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Post;
 use AdminBundle\Enum\ActionEnum;
+use AdminBundle\Service\Form\PostForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -132,7 +133,7 @@ class PostController extends Controller
                 //Affectation de la redirection
                 $redirection = $this->redirectToRoute("new_post");
             } else {
-                $post = $formService->getPostForEdit($form, $post);
+                $post = $formService->getPostForAdd($form, $post);
 
                 $redirection = $this->redirectToRoute("show_post");
             }
@@ -145,7 +146,14 @@ class PostController extends Controller
 
         $options = [
             "form" => $form->createView(),
-            "post" => $post
+            "post" => $post,
+            "key_title" => PostForm::KEY_TITLE,
+            "key_content" => PostForm::KEY_CONTENT,
+            "key_active" => PostForm::KEY_ACTIVE,
+            "key_date" => PostForm::KEY_DATE,
+            "key_files" => PostForm::KEY_FILES,
+            "ajouter" => $action === ActionEnum::ADD,
+            "modifier" => $action === ActionEnum::EDIT,
         ];
 
         return $this->render("AdminBundle:Post:form.html.twig", $options);

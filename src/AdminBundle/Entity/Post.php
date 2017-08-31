@@ -54,7 +54,7 @@ class Post
     /**
      * @var Media
      * @JMS\Type("AdminBundle\Entity\Media")
-     * @ORM\ManyToOne(targetEntity="Media", inversedBy="races")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="races", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id_media")
      */
     private $media;

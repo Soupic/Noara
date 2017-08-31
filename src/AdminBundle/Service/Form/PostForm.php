@@ -3,8 +3,10 @@
 namespace AdminBundle\Service\Form;
 
 
+use AdminBundle\Entity\Media;
 use AdminBundle\Entity\Post;
 use AdminBundle\Enum\ActionEnum;
+use AdminBundle\Form\MediaFileType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -21,6 +23,8 @@ class PostForm
     const KEY_CONTENT = "Contenu";
     const KEY_DATE = "Date";
     const KEY_ACTIVE = "Active";
+    const KEY_FILES = "mediaFile";
+
 
     /**
      * @var FormFactoryInterface
@@ -99,6 +103,11 @@ class PostForm
             )
         );
 
+        $form->add(
+            self::KEY_FILES,
+            MediaFileType::class
+        );
+
         return $form;
     }
 
@@ -140,6 +149,11 @@ class PostForm
             )
         );
 
+        $form->add(
+            self::KEY_FILES,
+            MediaFileType::class
+        );
+
         return $form;
     }
 
@@ -152,35 +166,32 @@ class PostForm
         FormInterface $form,
         Post $post
     ) {
+
+        /**
+         * Permet d'instancier notre entité média pour l'upload des fichiers
+         * @var Media
+         */
+        $media = new Media();
+
         //Récupération des champ du formulaire
         $title = $this->getDataForm($form, self::KEY_TITLE);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $date = $this->getDataForm($form, self::KEY_DATE);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
-
-        $post->setTitle($title);
-        $post->setContent($content);
-        $post->setDate($date);
-        $post->setActive($active);
-
-        return $post;
-
-    }
-
-    /**
-     * @param FormInterface $form
-     * @param Post          $post
-     * @return Post
-     */
-    public function getPostForEdit(
-        FormInterface $form,
-        Post $post
-    ) {
-        //Récupération des champ du formulaire
-        $title = $this->getDataForm($form, self::KEY_TITLE);
-        $content = $this->getDataForm($form, self::KEY_CONTENT);
-        $date = $this->getDataForm($form, self::KEY_DATE);
-        $active = $this->getDataForm($form, self::KEY_ACTIVE);
+        //Attention MediaFile contient un tableau associatif
+        $mediaFile = $this->getDataForm($form, self::KEY_FILES);
+        // Si un fichier est présent
+        if ($mediaFile["fichier"] !== null) {
+            //On récupère notre fichier
+            $file = $mediaFile["fichier"];
+            //Methode d'upload du fichier
+            $media->setFile($file);
+            $media->preUpload();
+            //on lui attribut un nom unique
+            $media->uniqName();
+            $media->upload();
+            $post->setMedia($media);
+        }
 
         $post->setTitle($title);
         $post->setContent($content);

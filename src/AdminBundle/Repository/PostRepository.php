@@ -22,7 +22,11 @@ class PostRepository extends EntityRepository
         $qb = $this->createQueryBuilder("post");
 
         $qb
-            ->select("post")
+            ->select(
+                "post",
+                "media"
+                )
+            ->leftJoin("post.media", "media")
         ;
 
         return $qb->getQuery();
@@ -38,7 +42,11 @@ class PostRepository extends EntityRepository
         $qb = $this->createQueryBuilder("post");
         //Requete qui récupère un post en fonction de son id
         $qb
-            ->select("post")
+            ->select(
+                "post",
+                "media"
+                )
+            ->leftJoin("post.media", "media")
             ->where($qb->expr()->eq("post.id", ":idPost"))
             ->setParameter("idPost", $idPost)
         ;
