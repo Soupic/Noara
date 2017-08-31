@@ -22,7 +22,11 @@ class MediaFileType extends AbstractType
    {
        $builder
            ->add(
-               "file", FileType::class
+               "fichier", FileType::class
+//               [
+//                   "label" => $options['label'],
+//                   "multiple" => $options["multiple"],
+//               ]
            );
    }
 
@@ -32,7 +36,9 @@ class MediaFileType extends AbstractType
    public function configOptions(OptionsResolver $resolver)
    {
    		$resolver->setDefaults(array(
-   			"data_class" => "AdminBundle\Entity\Media"
+   			"data_class" => "AdminBundle\Entity\Media",
+            "label" => "Ajouter un fichier",
+            "multiple" => true,
    		));
    }
 }
