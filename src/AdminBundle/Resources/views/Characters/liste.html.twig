@@ -15,6 +15,11 @@
                 {% else %}
                     <div class="disabled">Désactivé</div>
                 {% endif %}
+                {% if character.media is not null %}
+                    <div class="img">
+                        <img src="{{ asset(character.media.webPath) }}" alt="image de {{ character.name }}">
+                    </div>
+                {% endif %}
                 <div class="btnEdit"><a href="{{ path("admin_characters_edit", {"idCharacters" : character.id}) }}">Modification</a></div>
                 <div class="btnDisabled"><a href="#"></a></div>
                 <div class="btnDelete"><a href="{{ path("admin_characters_deleted", {"idCharacters" : character.id}) }}">Suppression</a></div>

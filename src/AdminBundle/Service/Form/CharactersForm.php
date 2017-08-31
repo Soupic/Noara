@@ -3,7 +3,9 @@
 namespace AdminBundle\Service\Form;
 
 use AdminBundle\Entity\Characters;
+use AdminBundle\Entity\Media;
 use AdminBundle\Enum\ActionEnum;
+use AdminBundle\Form\MediaFileType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +21,8 @@ class CharactersForm
     const KEY_NAME = "Nom";
     const KEY_CONTENT = "Contenu";
     const KEY_ACTIVE = "Active";
+    const KEY_FILES = "mediaFile";
+
 
     /**
      * @var FormFactoryInterface
@@ -96,6 +100,11 @@ class CharactersForm
             )
         );
 
+        $form->add(
+            self::KEY_FILES,
+            MediaFileType::class
+        );
+
         return $form;
     }
 
@@ -135,6 +144,11 @@ class CharactersForm
             )
         );
 
+        $form->add(
+            self::KEY_FILES,
+            MediaFileType::class
+        );
+
         return $form;
     }
 
@@ -148,9 +162,29 @@ class CharactersForm
         Characters $characters
     ) {
 
+        /**
+         * Permet d'instancier notre entité média pour l'upload des fichiers
+         * @var Media
+         */
+        $media = new Media();
+
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
+        //Attention MediaFile contient un tableau associatif
+        $mediaFile = $this->getDataForm($form, self::KEY_FILES);
+        // Si un fichier est présent
+        if ($mediaFile["fichier"] !== null) {
+            //On récupère notre fichier
+            $file = $mediaFile["fichier"];
+            //Methode d'upload du fichier
+            $media->setFile($file);
+            $media->preUpload();
+            //on lui attribut un nom unique
+            $media->uniqName();
+            $media->upload();
+            $characters->setMedia($media);
+        }
 
         $characters->setName($name);
         $characters->setContent($content);

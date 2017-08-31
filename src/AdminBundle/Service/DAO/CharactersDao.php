@@ -36,7 +36,7 @@ class CharactersDao extends AbstractMasterDAO
             //Récupération de le requete
             $query = $repo->getAllCharacters();
             //Retourne une collection de personnages
-            return new ArrayCollection($query->getArrayResult());
+            return new ArrayCollection($query->getResult());
         } catch (\Exception $exception) {
             throw new ArchitectureException(
                 "Impossible de récupéré la liste des personnages",

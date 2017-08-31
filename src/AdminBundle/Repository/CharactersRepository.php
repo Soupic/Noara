@@ -21,7 +21,11 @@ class CharactersRepository extends EntityRepository
 
         //Requete permétant de trouvé tous les personnages
         $qb
-            ->select("characters")
+            ->select(
+                "characters",
+                "media"
+                )
+            ->leftJoin("characters.media", "media")
         ;
 
         return $qb->getQuery();
@@ -38,7 +42,11 @@ class CharactersRepository extends EntityRepository
 
         //Récupération du personnage gràce à l'id
         $qb
-            ->select("characters")
+            ->select(
+                "characters",
+                "media"
+                )
+            ->leftJoin("characters.media", "media")
             ->where($qb->expr()->eq("characters.id", ":idCharacters"))
             ->setParameter("idCharacters", $idCharacters)
         ;

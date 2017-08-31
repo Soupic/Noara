@@ -55,7 +55,7 @@ class Characters
     /**
      * @var Media
      * @JMS\Type("AdminBundle\Entity\Media")
-     * @ORM\ManyToOne(targetEntity="Media", inversedBy="characters")
+     * @ORM\ManyToOne(targetEntity="Media", inversedBy="characters", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id_media")
      */
     private $media;

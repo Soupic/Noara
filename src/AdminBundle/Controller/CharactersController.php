@@ -4,6 +4,7 @@ namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Characters;
 use AdminBundle\Enum\ActionEnum;
+use AdminBundle\Service\Form\CharactersForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Response;
@@ -128,7 +129,7 @@ class CharactersController extends Controller
 
                 $redirection = $this->redirectToRoute("admin_characters");
             } else {
-                $characters = $formService->getCharactersForEdit($form, $characters);
+                $characters = $formService->getCharactersForAdd($form, $characters);
 
                 $redirection = $this->redirectToRoute("show_characters");
             }
@@ -141,7 +142,13 @@ class CharactersController extends Controller
 
         $options = [
             "form" => $form->createView(),
-            "characters" => $characters
+            "characters" => $characters,
+            "key_name" => CharactersForm::KEY_NAME,
+            "key_content" => CharactersForm::KEY_CONTENT,
+            "key_active" => CharactersForm::KEY_ACTIVE,
+            "key_files" => CharactersForm::KEY_FILES,
+            "ajouter" => $action === ActionEnum::ADD,
+            "modifier" => $action === ActionEnum::EDIT,
         ];
 
         return $this->render("AdminBundle:Characters:form.html.twig", $options);
