@@ -7,7 +7,18 @@
             <div class="btnForm"><a href="{{ path("admin_races") }}">Ajouter race</a></div>
         </div>
         {% for race in races %}
-            <div class="blocKContent">
+            <div class="blocKContent ui padded segment">
+                <div class="btnEdit">
+                    <a href="{{ path("admin_races_edit", {"idRaces" : race.id}) }}">
+                        <i class="configure icon"></i>
+                    </a>
+                </div>
+                <div class="btnDisabled"></div>
+                <div class="btnDelete">
+                    <a href="{{ path("admin_races_deleted", {"idRaces" : race.id}) }}">
+                        <i class="remove icon"></i>
+                    </a>
+                </div>
                 <div class="name">{{ race.name }}</div>
                 <div class="content">{{ race.content }}</div>
                 {% if race.active == 1 %}

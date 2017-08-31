@@ -8,9 +8,17 @@
         </div>
         {% for post in posts %}
             <div class="blockContent ui padded segment">
-                <div class="btnEdit"><a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}">Modification</a></div>
+                <div class="btnEdit">
+                    <a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}">
+                        <i class="configure icon"></i>
+                    </a>
+                </div>
                 <div class="btnDisabled"><a href="#"></a></div>
-                <div class="btnDelete"><a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}">Suppression</a></div>
+                <div class="btnDelete">
+                    <a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}">
+                        <i class="remove icon"></i>
+                    </a>
+                </div>
                 <div class="title">{{ post.title }}</div>
                 <div class="Content">{{ post.content }}</div>
                 {% if post.active == 1 %}

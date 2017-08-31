@@ -7,7 +7,18 @@
             <div class="btnForm"><a href="{{ path("admin_characters") }}">Ajouter personnage</a></div>
         </div>
         {% for character in characters %}
-            <div class="blockContent">
+            <div class="blockContent ui padded segment">
+                <div class="btnEdit">
+                    <a href="{{ path("admin_characters_edit", {"idCharacters" : character.id}) }}">
+                        <i class="configure icon"></i>
+                    </a>
+                </div>
+                <div class="btnDisabled"><a href="#"></a></div>
+                <div class="btnDelete">
+                    <a href="{{ path("admin_characters_deleted", {"idCharacters" : character.id}) }}">
+                        <i class="remove icon"></i>
+                    </a>
+                </div>
                 <div class="title">{{ character.name }}</div>
                 <div class="Content">{{ character.content }}</div>
                 {% if character.active == 1 %}
@@ -20,9 +31,6 @@
                         <img src="{{ asset(character.media.webPath) }}" alt="image de {{ character.name }}">
                     </div>
                 {% endif %}
-                <div class="btnEdit"><a href="{{ path("admin_characters_edit", {"idCharacters" : character.id}) }}">Modification</a></div>
-                <div class="btnDisabled"><a href="#"></a></div>
-                <div class="btnDelete"><a href="{{ path("admin_characters_deleted", {"idCharacters" : character.id}) }}">Suppression</a></div>
             </div>
         {% endfor %}
     </div>
