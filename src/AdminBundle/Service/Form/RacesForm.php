@@ -115,11 +115,7 @@ class RacesForm
 
         $form->add(
             self::KEY_FILES,
-            CollectionType::class,
-            $this->getOptionFieldFiles(
-                $race,
-                ActionEnum::ADD
-            )
+            MediaFileType::class
         );
 
         return $form;
@@ -173,10 +169,6 @@ class RacesForm
         $form->add(
             self::KEY_FILES,
             MediaFileType::class
-//            $this->getOptionFieldFiles(
-//                $race,
-//                ActionEnum::EDIT
-//            )
         );
 
         return $form;
@@ -193,61 +185,26 @@ class RacesForm
     ) {
 
         /**
+         * Permet d'instancier notre entité média pour l'upload des fichiers
          * @var Media
          */
         $media = new Media();
 
+        // On récupère les valeur saisie dans le formulaire
         $name = $this->getDataForm($form, self::KEY_NAME);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
         $character = $this->getDataForm($form, self::KEY_CHARACTERS);
+        //Attention MediaFile contient un tableau associatif
         $mediaFile = $this->getDataForm($form, self::KEY_FILES);
-        $file = $mediaFile["file"];
-
-
-        if ($file !== null) {
-
+        // Si un fichier est présent
+        if ($mediaFile["fichier"] !== null) {
+            //On récupère notre fichier
+            $file = $mediaFile["fichier"];
+            //Methode d'upload du fichier
             $media->setFile($file);
             $media->preUpload();
-            $media->uniqName();
-            $media->upload();
-            $race->setMedia($media);
-        }
-
-        $race->setName($name);
-        $race->setContent($content);
-        $race->setActive($active);
-        $race->setCharacters($character);
-
-        return $race;
-    }
-
-    /**
-     * @param FormInterface $form
-     * @param Races         $race
-     * @return Races
-     */
-    public function getRaceForEdit(
-        FormInterface $form,
-        Races $race
-    ) {
-        /**
-         * @var Media
-         */
-        $media = new Media();
-
-        $name = $this->getDataForm($form, self::KEY_NAME);
-        $content = $this->getDataForm($form, self::KEY_CONTENT);
-        $active = $this->getDataForm($form, self::KEY_ACTIVE);
-        $character = $this->getDataForm($form, self::KEY_CHARACTERS);
-        $mediaFile = $this->getDataForm($form, self::KEY_FILES);
-        $file = $mediaFile["file"];
-
-
-        if ($file !== null) {
-
-            $media->setFile($file);
-            $media->preUpload();
+            //on lui attribut un nom unique
             $media->uniqName();
             $media->upload();
             $race->setMedia($media);

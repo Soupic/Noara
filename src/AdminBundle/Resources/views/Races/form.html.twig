@@ -1,24 +1,63 @@
 {% extends "AdminBundle::layout.html.twig" %}
 
 {% block body %}
+    {{ form_start(form, {"attr":
+        {
+            "class" : "ui form",
+            "novalidate" : "novalidate",
+        }
+    })
+    }}
     <div class="blockTitre">
         <div class="titrePage">Races</div>
         <div class="btnForm"><a href="{{ path("show_races") }}">Liste des races</a></div>
     </div>
-            {{ form_start(form, {"attr":
-                {
-                    "class" : "ui form",
-                    "novalidate" : "novalidate",
-                }
-            })
-            }}
-        <div class="field">
-            {{ form_label(form) }}
-            {{ form_widget(form) }}
-            {{ form_errors(form) }}
+        <div class="ui padded attached segment">
+            <div class="three fields">
+                <div class="field">
+                    {{ form_label(form[key_name]) }}
+                    {{ form_widget(form[key_name]) }}
+                    {{ form_errors(form[key_name]) }}
+                <div class="field">
+                    {{ form_label(form[key_active]) }}
+                    {{ form_widget(form[key_active]) }}
+                    {{ form_errors(form[key_active]) }}
+                </div>
+                <div class="field">
+                    {{ form_label(form[key_characters]) }}
+                    {{ form_widget(form[key_characters]) }}
+                    {{ form_errors(form[key_characters]) }}
+                </div>
+                </div>
+                <div class="field">
+                    {{ form_label(form[key_content]) }}
+                    {{ form_widget(form[key_content]) }}
+                    {{ form_errors(form[key_content]) }}
+                </div>
+                {% if race.media is not null %}
+                    <div class="field">
+                        {{ form_label(form[key_files]) }}
+                        {{ form_widget(form[key_files]) }}
+                        {{ form_errors(form[key_files]) }}
+                    </div>
+                {% endif %}
+                {{ dump(race) }}
+            </div>
         </div>
-        <div>
-            <button class="ui button">Ajouter une race</button>
+    <div class="fields aes-btn-bottom">
+        {#<div class="eight wide field">#}
+        {#<a#}
+        {#class="ui button massive fluid center aligned"#}
+        {#href="{{ path('systemetache_tache_liste') }}">#}
+        {#Annuler#}
+        {#</a>#}
+        {#</div>#}
+        <div class="eight wide field">
+            <button class="ui submit massive button center aligned positive fluid"
+                    id="form_validate">
+                Valider
+            </button>
         </div>
+    </div>
     {{ form_end(form) }}
 {% endblock %}

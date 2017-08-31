@@ -5,6 +5,7 @@ namespace AdminBundle\Controller;
 
 use AdminBundle\Entity\Races;
 use AdminBundle\Enum\ActionEnum;
+use AdminBundle\Service\Form\RacesForm;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -135,7 +136,7 @@ class RacesController extends Controller
 
                 $redirection = $this->redirectToRoute("admin_races");
             } else {
-                $race = $formService->getRaceForEdit($form, $race);
+                $race = $formService->getRaceForAdd($form, $race);
 
                 $redirection = $this->redirectToRoute("show_races");
             }
@@ -149,7 +150,14 @@ class RacesController extends Controller
 
         $options = [
             "form" => $form->createView(),
-            "race" => $race
+            "race" => $race,
+            "key_name" => RacesForm::KEY_NAME,
+            "key_content" => RacesForm::KEY_CONTENT,
+            "key_active" => RacesForm::KEY_ACTIVE,
+            "key_characters" => RacesForm::KEY_CHARACTERS,
+            "key_files" => RacesForm::KEY_FILES,
+            "ajouter" => $action === ActionEnum::ADD,
+            "modifier" => $action === ActionEnum::EDIT,
         ];
 
         return $this->render("AdminBundle:Races:form.html.twig", $options);
