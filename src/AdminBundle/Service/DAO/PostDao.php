@@ -67,4 +67,17 @@ class PostDao extends AbstractMasterDAO
             );
         }
     }
+
+    public function getCountEnablePoste($isActivate)
+    {
+        //On appel le répository
+        $repo = $this->entity->getRepository(self::NAME_REPO);
+
+
+        $query = $repo->getCountEnablePost($isActivate);
+//        dump($query);die();
+
+        return new ArrayCollection($query->getResult());
+
+    }
 }

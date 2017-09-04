@@ -34,6 +34,19 @@ class PostController extends Controller
 
     /**
      * @Route(
+     *     "enablePost/",
+     *      name = "enable_post"
+     * )
+     */
+    public function EnableAction()
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        return $activatorUtils->enable();
+    }
+
+    /**
+     * @Route(
      *     "newPost/",
      *     name ="new_post"
      * )

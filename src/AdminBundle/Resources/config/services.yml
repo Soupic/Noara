@@ -61,3 +61,15 @@ services:
           shared: true
           arguments:
               - "@doctrine.orm.entity_manager"
+
+    noara.admin.utils.activator:
+          class: AdminBundle\Service\Utils\ActivatorUtils
+          lazy:
+          shared: true
+          arguments:
+              - "@noara.admin.dao.post"
+              - "@noara.admin.dao.races"
+              - "@noara.admin.dao.characters"
+              - "@noara.admin.persistance.post"
+              - "@noara.admin.persistance.races"
+              - "@noara.admin.persistance.characters"
