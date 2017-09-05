@@ -11,9 +11,9 @@ class ActionEnum
     const ADD = 1;
     const EDIT = 2;
     const REMOVE = 3;
-//
-//    //Constante pour définir de quelle partie il s'agit
-//    const POST = "post";
-//    const RACE = "race";
-//    const CHAR = "character";
+
+    //Constante pour définir de quelle partie il s'agit
+    const KEY_POST = "post";
+    const KEY_RACE = "race";
+    const KEY_CHAR = "characters";
 }
