@@ -53,4 +53,22 @@ class CharactersRepository extends EntityRepository
         //Retour de la requete
         return $qb->getQuery();
     }
+
+    /**
+     * @param int $isActivate
+     * @return Query
+     * Méthode de récupération de la liste des personnages actif
+     */
+    public function getCountEnableCharacter($isActivate)
+    {
+        $qb = $this->createQueryBuilder("character");
+
+        $qb
+            ->select("character")
+            ->where($qb->expr()->eq("character.active", ":isActivate"))
+            ->setParameter("isActivate", $isActivate)
+        ;
+
+        return $qb->getQuery();
+    }
 }
