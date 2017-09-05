@@ -38,11 +38,13 @@ class PostController extends Controller
      *      name = "enable_post"
      * )
      */
-    public function EnableAction()
+    public function enableAction()
     {
         $activatorUtils = $this->get("noara.admin.utils.activator");
 
-        return $activatorUtils->enable();
+        if ($activatorUtils->enable()) {
+            dump("YATA");die();
+        }
     }
 
     /**

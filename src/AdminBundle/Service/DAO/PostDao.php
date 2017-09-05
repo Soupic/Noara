@@ -68,16 +68,27 @@ class PostDao extends AbstractMasterDAO
         }
     }
 
+    /**
+     * @param int $isActivate
+     * @return ArrayCollection
+     * @throws ArchitectureException
+     */
     public function getCountEnablePoste($isActivate)
     {
-        //On appel le répository
-        $repo = $this->entity->getRepository(self::NAME_REPO);
+        try {
+            //On appel le répository
+            $repo = $this->entity->getRepository(self::NAME_REPO);
 
+            $query = $repo->getCountEnablePost($isActivate);
 
-        $query = $repo->getCountEnablePost($isActivate);
-//        dump($query);die();
-
-        return new ArrayCollection($query->getResult());
+            return new ArrayCollection($query->getResult());
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupérer la liste des post actif",
+                "TODO",
+                $exception
+            );
+        }
 
     }
 }
