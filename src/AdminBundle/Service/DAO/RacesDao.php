@@ -64,4 +64,27 @@ class RacesDao extends AbstractMasterDAO
             );
         }
     }
+
+    /**
+     * @param int $isActivate
+     * @return ArrayCollection
+     * @throws ArchitectureException
+     */
+    public function getCountEnableRace($isActivate)
+    {
+        try {
+            //On appel le répo concerné
+            $repo = $this->entity->getRepository(self::NAME_REPO);
+            //On va chercher la méthode voulu
+            $query = $repo->getCountEnableRace($isActivate);
+            //On retourne la requete
+            return new ArrayCollection($query->getResult());
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupérer la liste des races active",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }

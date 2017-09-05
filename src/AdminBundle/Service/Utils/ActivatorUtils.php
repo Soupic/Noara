@@ -3,6 +3,7 @@
 namespace AdminBundle\Service\Utils;
 
 
+use AdminBundle\Enum\ActionEnum;
 use AdminBundle\Service\DAO\CharactersDao;
 use AdminBundle\Service\DAO\PostDao;
 use AdminBundle\Service\DAO\RacesDao;
@@ -12,9 +13,7 @@ use AdminBundle\Service\Persistance\RacesPersistance;
 
 class ActivatorUtils
 {
-    const KEY_POST = "post";
-    const KEY_RACE = "race";
-    const KEY_CHAR = "characters";
+    const KEY_ENABLE = 1;
 
     /**
      * @var PostDao
@@ -73,17 +72,38 @@ class ActivatorUtils
 
     public function enable()
     {
-        return $this->isValideForEnable();
+        return $this->isValideForEnable(ActionEnum::KEY_POST);
     }
 
-    private function isValideForEnable()
+    private function isValideForEnable($field)
     {
-        //On appel la méthode pour récupéré tout les post actif
-        $postEnables = $this->postDao->getCountEnablePoste(1);
-        //On vérifie dans la liste combien de poste sont à actif
-        foreach ($postEnables as $enable) {
-            dump($postEnables);die();
+        $post = $field === ActionEnum::KEY_POST;
+        $race = $field === ActionEnum::KEY_RACE;
+        $character = $field === ActionEnum::KEY_CHAR;
+        //On vérifie si il s'agit d'un post, d'une race ou d'un personnage
+        if ($post) {
+            //On appel la méthode pour récupéré tout les post actif
+            $postEnables = $this->postDao->getCountEnablePoste(self::KEY_ENABLE);
+            $countField = $postEnables;
+
+        } elseif ($race) {
+            //On appel la méthode pour récupéré tout les post actif
+            $raceEnables = $this->raceDao->getCountEnableRace(self::KEY_ENABLE);
+            $countField = $raceEnables;
+
+        } elseif ($character) {
+            //On appel la méthode pour récupéré tout les post actif
+            $charactertEnables = $this->characterDao->getCountEnableCharacter(self::KEY_ENABLE);
+            $countField = $charactertEnables;
+
         }
-//        dump($postEnable);die();
+        //On compte le nombre d'élement actif
+        $result = count($countField);
+        //Si le tableau est inférieur à 5 éléments on passe le parametre actif à 1
+        if ($result < 5) {
+            return true;
+        }
+
+        return false;
     }
 }
