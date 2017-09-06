@@ -13,7 +13,17 @@
                         <i class="configure icon"></i>
                     </a>
                 </div>
-                <div class="btnDisabled"><a href="#"></a></div>
+                <div class="btnEnableDisabled">
+                    {% if post.active == 0 %}
+                        <a href="{{ path("admin_enable_post", {"idPost" : post.id}) }}">
+                            <i class="add circle icon"></i>
+                        </a>
+                    {% else %}
+                        <a href="{{ path("admin_disabled_post", {"idPost" : post.id}) }}">
+                            <i class="minus circle icon"></i>
+                        </a>
+                    {% endif %}
+                </div>
                 <div class="btnDelete">
                     <a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}">
                         <i class="remove icon"></i>

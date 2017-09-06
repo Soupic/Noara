@@ -34,17 +34,38 @@ class PostController extends Controller
 
     /**
      * @Route(
-     *     "enablePost/",
-     *      name = "enable_post"
+     *     "enablePost/{idPost}",
+     *     requirements={"idPost": "\d+"},
+     *      name = "admin_enable_post"
      * )
+     * @param int $idPost
+     * @return RedirectResponse
      */
-    public function enableAction()
+    public function enableAction($idPost)
     {
         $activatorUtils = $this->get("noara.admin.utils.activator");
 
-        if ($activatorUtils->enable()) {
-            dump("YATA");die();
-        }
+        $activatorUtils->enable(ActionEnum::KEY_POST, $idPost);
+
+        return $this->redirectToRoute("show_posts");
+    }
+
+    /**
+     * @Route(
+     *     "disabledPost/{idPost}",
+     *     requirements={"idPost": "\d+"},
+     *     name = "admin_disabled_post"
+     * )
+     * @param int $idPost
+     * @return RedirectResponse
+     */
+    public function disabledAction($idPost)
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        $activatorUtils->desabled(ActionEnum::KEY_POST, $idPost);
+
+        return $this->redirectToRoute("show_posts");
     }
 
     /**
