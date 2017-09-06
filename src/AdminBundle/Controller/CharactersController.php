@@ -30,6 +30,42 @@ class CharactersController extends Controller
     }
 
     /**
+     * @Route(
+     *     "enableChar/{idCharacter}",
+     *     requirements={"idCharacter": "\d+"},
+     *      name = "admin_enable_characters"
+     * )
+     * @param int $idCharacter
+     * @return RedirectResponse
+     */
+    public function enableAction($idCharacter)
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        $activatorUtils->enable(ActionEnum::KEY_CHAR, $idCharacter);
+
+        return $this->redirectToRoute("show_characters");
+    }
+
+    /**
+     * @Route(
+     *     "disabledChar/{idCharacter}",
+     *     requirements={"idCharacter": "\d+"},
+     *     name = "admin_disabled_characters"
+     * )
+     * @param int $idCharacter
+     * @return RedirectResponse
+     */
+    public function disabledAction($idCharacter)
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        $activatorUtils->desabled(ActionEnum::KEY_CHAR, $idCharacter);
+
+        return $this->redirectToRoute("show_characters");
+    }
+
+    /**
      * @param Request $request
      * @Route("newCharacters/", name="admin_characters")
      * @return RedirectResponse|Response

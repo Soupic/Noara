@@ -76,7 +76,7 @@ class CharactersDao extends AbstractMasterDAO
     public function getCountEnableCharacter($isActivate)
     {
         try {
-            $repo = $this->entity->createQueryBuilder(self::NAME_REPO);
+            $repo = $this->entity->getRepository(self::NAME_REPO);
 
             $query = $repo->getCountEnableCharacter($isActivate);
 
