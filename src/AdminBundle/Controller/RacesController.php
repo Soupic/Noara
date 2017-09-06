@@ -37,6 +37,42 @@ class RacesController extends Controller
     }
 
     /**
+     * @Route(
+     *     "enableRace/{idRaces}",
+     *     requirements={"idRaces": "\d+"},
+     *      name = "admin_enable_races"
+     * )
+     * @param int $idRaces
+     * @return RedirectResponse
+     */
+    public function enableAction($idRaces)
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        $activatorUtils->enable(ActionEnum::KEY_RACE, $idRaces);
+
+        return $this->redirectToRoute("show_races");
+    }
+
+    /**
+     * @Route(
+     *     "disabledRace/{idRaces}",
+     *     requirements={"idRaces": "\d+"},
+     *     name = "admin_disabled_races"
+     * )
+     * @param int $idRaces
+     * @return RedirectResponse
+     */
+    public function disabledAction($idRaces)
+    {
+        $activatorUtils = $this->get("noara.admin.utils.activator");
+
+        $activatorUtils->desabled(ActionEnum::KEY_RACE, $idRaces);
+
+        return $this->redirectToRoute("show_races");
+    }
+
+    /**
      * @param Request $request
      * @Route("newRaces/", name="admin_races")
      * @return RedirectResponse|Response

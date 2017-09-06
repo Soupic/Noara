@@ -65,7 +65,7 @@ class RacesRepository extends EntityRepository
 
         $qb
             ->select("races")
-            ->where($qb->expr()->eq("isActivate", ":isActivate"))
+            ->where($qb->expr()->eq("races.active", ":isActivate"))
             ->setParameter("isActivate", $isActivate)
         ;
 
