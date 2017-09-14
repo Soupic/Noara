@@ -1,4 +1,4 @@
-{% extends "AdminBundle::layout.html.twig" %}
+{#{% extends "AdminBundle::layout.html.twig" %}#}
 
 {% block body %}
     {{ form_start(form, {"attr":
@@ -8,11 +8,11 @@
         }
     })
     }}
-    <div class="blockTitre">
-        <div class="titrePage">Articles</div>
-        <div class="btnForm"><a href="{{ path("show_posts") }}">Liste des articles</a></div>
-    </div>
-    <div class="ui padded attached segment">
+    {#<div class="blockTitre">#}
+        {#<div class="titrePage">Articles</div>#}
+        {#<div class="btnForm"><a href="{{ path("show_posts") }}">Liste des articles</a></div>#}
+    {#</div>#}
+    <div class="ui padded attached segment form" onclick="showForm()">
         <div class="three fields">
             <div class="field">
                 {{ form_label(form[key_title]) }}
@@ -34,13 +34,13 @@
                 {{ form_widget(form[key_content]) }}
                 {{ form_errors(form[key_content]) }}
             </div>
-            {% if post.media is not null %}
+            {#{% if post.media is not null %}#}
                 <div class="field">
                     {{ form_label(form[key_files]) }}
                     {{ form_widget(form[key_files]) }}
                     {{ form_errors(form[key_files]) }}
                 </div>
-            {% endif %}
+            {#{% endif %}#}
         </div>
     </div>
     <div class="fields aes-btn-bottom">

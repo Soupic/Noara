@@ -4,43 +4,55 @@
     <div class="blockBody">
         <div class="blockTitre">
             <div class="titrePage">Articles</div>
-            <div class="btnForm"><a href="{{ path("new_post") }}">Ajouter un article</a></div>
+            {#<div class="btnForm"><a href="{{ path("new_post") }}">Ajouter un article</a></div>#}
+            <div class="btnForm">
+                <button class="ui button btnAddPost">Ajouter un article</button>
+                <button class="ui button btnDeletePost">Annuler</button>
+            </div>
+            <div class="form">
+                {#{% include "AdminBundle::Post:form.html.twig" %}#}
+                {{ render(controller("AdminBundle:Post:add")) }}
+            </div>
         </div>
         {% for post in posts %}
             <div class="blockContent ui padded segment">
-                <div class="btnEdit">
-                    <a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}">
-                        <i class="configure icon"></i>
-                    </a>
+                <div class="contenuIcon">
+                    <div class="btnEdit">
+                        <a href="{{ path("admin_post_edit", {"idPost" : post.id}) }}" title="Editer un article">
+                            <i class="huge black configure icon"></i>
+                        </a>
+                    </div>
+                    <div class="btnEnableDisabled">
+                        {% if post.active == 0 %}
+                            <a href="{{ path("admin_enable_post", {"idPost" : post.id}) }}" title="Activer un article">
+                                <i class="huge black add circle icon"></i>
+                            </a>
+                        {% else %}
+                            <a href="{{ path("admin_disabled_post", {"idPost" : post.id}) }}" title="Désactiver un article">
+                                <i class="huge black minus circle icon"></i>
+                            </a>
+                        {% endif %}
+                    </div>
+                    <div class="btnDelete">
+                        <a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}" title="Supprimer un article">
+                            <i class="huge black remove icon"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="btnEnableDisabled">
-                    {% if post.active == 0 %}
-                        <a href="{{ path("admin_enable_post", {"idPost" : post.id}) }}">
-                            <i class="add circle icon"></i>
-                        </a>
+                <div class="contenuEcrit">
+                    <div class="title">{{ post.title }}</div>
+                    <div class="Content">{{ post.content }}</div>
+                    {% if post.active == 1 %}
+                        <div class="enable">Active</div>
                     {% else %}
-                        <a href="{{ path("admin_disabled_post", {"idPost" : post.id}) }}">
-                            <i class="minus circle icon"></i>
-                        </a>
+                        <div class="disabled">Désactivé</div>
+                    {% endif %}
+                    {% if post.media is not null %}
+                        <div class="img">
+                            <img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">
+                        </div>
                     {% endif %}
                 </div>
-                <div class="btnDelete">
-                    <a href="{{ path("admin_post_deleted", {"idPost" : post.id}) }}">
-                        <i class="remove icon"></i>
-                    </a>
-                </div>
-                <div class="title">{{ post.title }}</div>
-                <div class="Content">{{ post.content }}</div>
-                {% if post.active == 1 %}
-                    <div class="enable">Active</div>
-                {% else %}
-                    <div class="disabled">Désactivé</div>
-                {% endif %}
-                {% if post.media is not null %}
-                    <div class="img">
-                        <img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">
-                    </div>
-                {% endif %}
             </div>
         {% endfor %}
     </div>

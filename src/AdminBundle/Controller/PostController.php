@@ -24,11 +24,17 @@ class PostController extends Controller
     public function showAction()
     {
         $postDao = $this->get("noara.admin.dao.post");
+//        $post = new Post();
 
+//        $form = $this->managementForm($request, $post, ActionEnum::ADD);
         $posts = $postDao->getAllPost();
+
+
+//        dump($options);die();
 
         return $this->render("AdminBundle:Post:liste.html.twig", [
             "posts" => $posts,
+//            "form" => $form,
         ]);
     }
 
@@ -71,7 +77,7 @@ class PostController extends Controller
     /**
      * @Route(
      *     "newPost/",
-     *     name ="new_post"
+     *     name="new_post"
      * )
      * @param Request $request
      * @return mixed
@@ -193,5 +199,6 @@ class PostController extends Controller
         ];
 
         return $this->render("AdminBundle:Post:form.html.twig", $options);
+//        return $options;
     }
 }
