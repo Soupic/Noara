@@ -5,9 +5,9 @@ $(".btnAddPost").click(
 );
 
 $(".btnDeletePost").click(
-  function hideForm() {
-      $(".form").slideUp();
-  }
+    function hideForm() {
+        $(".form").slideUp();
+    }
 );
 
 // function showForm() {
