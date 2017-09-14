@@ -9,7 +9,3 @@ $(".btnDeletePost").click(
         $(".form").slideUp();
     }
 );
-
-// function showForm() {
-//     this.style.display="block";
-// }

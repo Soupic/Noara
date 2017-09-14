@@ -1,13 +1,45 @@
 .container.ui.grid
 {
-    margin-top: 0em; !important;
-    margin-left: 0em;!important;
-    margin-right: 0em; !important;
+    margin: 35px;
+    /*margin-top: 0em; !important;*/
+    /*margin-left: 0em;!important;*/
+    /*margin-right: 0em; !important;*/
     /*display: flex;*/
 }
 
+.ui.three.buttons {
+    margin-top: 25px;
+}
 
 .headerPage
 {
     display: flex;
+    flex-direction: column;
+    margin-bottom: inherit;
+}
+
+.container.ui.grid{
+    display: flex;
+    flex-direction: column;
+}
+
+.blockBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.btnForm {
+    border: 1px solid #61a5e8;
+    padding: 9px;
+    border-radius: 3px;
+}
+
+.contenuIcon {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.form {
+    display: none;
 }
