@@ -5,6 +5,8 @@ namespace AdminBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Post
@@ -59,6 +61,15 @@ class Post
      */
     private $media;
 
+    //Ajouter une méthode construct avec la date
+
+    /**
+     * Post constructor.
+     */
+    public function __construct()
+    {
+        $this->date = new DateTime();
+    }
 
     /**
      * Get id

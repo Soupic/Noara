@@ -24,17 +24,10 @@ class PostController extends Controller
     public function showAction()
     {
         $postDao = $this->get("noara.admin.dao.post");
-//        $post = new Post();
-
-//        $form = $this->managementForm($request, $post, ActionEnum::ADD);
         $posts = $postDao->getAllPost();
-
-
-//        dump($options);die();
 
         return $this->render("AdminBundle:Post:liste.html.twig", [
             "posts" => $posts,
-//            "form" => $form,
         ]);
     }
 
@@ -171,13 +164,12 @@ class PostController extends Controller
             //Si c'est un ajout
             if ($action === ActionEnum::ADD) {
                 $post = $formService->getPostForAdd($form, $post);
-
-                //Affectation de la redirection
-                $redirection = $this->redirectToRoute("new_post");
+//                //Affectation de la redirection
+                $redirection = $this->forward("AdminBundle:Post:add");
             } else {
                 $post = $formService->getPostForAdd($form, $post);
 
-                $redirection = $this->redirectToRoute("show_post");
+                $redirection = $this->redirectToRoute("show_posts");
             }
 
             //Appel à la méthode pour sauvegarder le post
@@ -198,7 +190,9 @@ class PostController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-        return $this->render("AdminBundle:Post:form.html.twig", $options);
-//        return $options;
+        if ($action === ActionEnum::ADD) {
+            return $this->render("AdminBundle:Post:form.html.twig", $options);
+        }
+        return $this->render("AdminBundle:Post:edit.html.twig", $options);
     }
 }

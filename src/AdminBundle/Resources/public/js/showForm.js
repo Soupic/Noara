@@ -1,11 +1,11 @@
 $(".btnAddPost").click(
   function showForm() {
-      $(".form").slideDown();
+      $(".formHidden").slideDown();
   }
 );
 
 $(".btnDeletePost").click(
     function hideForm() {
-        $(".form").slideUp();
+        $(".formHidden").slideUp();
     }
 );
