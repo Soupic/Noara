@@ -163,7 +163,7 @@ class CharactersController extends Controller
             if ($action === ActionEnum::ADD) {
                 $characters = $formService->getCharactersForAdd($form, $characters);
 
-                $redirection = $this->redirectToRoute("admin_characters");
+                $redirection = $this->forward("AdminBundle:Characters:show");
             } else {
                 $characters = $formService->getCharactersForAdd($form, $characters);
 
@@ -187,6 +187,9 @@ class CharactersController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-        return $this->render("AdminBundle:Characters:form.html.twig", $options);
+        if ($action === ActionEnum::ADD) {
+            return $this->render("AdminBundle:Characters:form.html.twig", $options);
+        }
+        return $this->render("AdminBundle:Characters:edit.html.twig", $options);
     }
 }

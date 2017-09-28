@@ -1,3 +1,5 @@
+{% extends "AdminBundle::layout.html.twig" %}
+
 {% block body %}
     {{ form_start(form, {"attr":
         {
@@ -6,7 +8,11 @@
         }
     })
     }}
-    <div class="ui padded attached segment">
+    <div class="blockTitre">
+        <div class="titrePage">Personnages</div>
+        <div class="btnForm"><a href="{{ path("show_characters") }}">Liste des personnages</a></div>
+    </div>
+    <div class="ui padded attached segment form">
         <div class="three fields">
             <div class="field">
                 {{ form_label(form[key_name]) }}
@@ -23,14 +29,23 @@
                 {{ form_widget(form[key_content]) }}
                 {{ form_errors(form[key_content]) }}
             </div>
-                <div class="field">
-                    {{ form_label(form[key_files]) }}
-                    {{ form_widget(form[key_files]) }}
-                    {{ form_errors(form[key_files]) }}
-                </div>
+            {#{% if characters.media is not null %}#}
+            <div class="field">
+                {{ form_label(form[key_files]) }}
+                {{ form_widget(form[key_files]) }}
+                {{ form_errors(form[key_files]) }}
+            </div>
+            {#{% endif %}#}
         </div>
     </div>
     <div class="fields aes-btn-bottom">
+        {#<div class="eight wide field">#}
+        {#<a#}
+        {#class="ui button massive fluid center aligned"#}
+        {#href="{{ path('systemetache_tache_liste') }}">#}
+        {#Annuler#}
+        {#</a>#}
+        {#</div>#}
         <div class="eight wide field">
             <button class="ui submit massive button center aligned positive fluid"
                     id="form_validate">
