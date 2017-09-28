@@ -1,6 +1,6 @@
 services:
     noara.admin.form.races:
-        class: PageBundle\Service\Form\RacesForm
+        class: AdminBundle\Service\Form\RacesForm
         lazy: true
         shared: true
         arguments:
@@ -13,8 +13,8 @@ services:
       arguments:
           - "@doctrine.orm.entity_manager"
 
-    noara.admin.dao.races:
-      class: PageBundle\Service\DAO\RacesDao
+    noara.dao.races:
+      class: AdminBundle\Service\DAO\RacesDao
       lazy: true
       shared: true
       arguments:
