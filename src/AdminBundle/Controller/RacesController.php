@@ -170,7 +170,7 @@ class RacesController extends Controller
             if ($action === ActionEnum::ADD) {
                 $race = $formService->getRaceForAdd($form, $race);
 
-                $redirection = $this->redirectToRoute("admin_races");
+                $redirection = $this->forward("AdminBundle:Races:show");
             } else {
                 $race = $formService->getRaceForAdd($form, $race);
 
@@ -178,7 +178,6 @@ class RacesController extends Controller
             }
 
             //Appel du service de persistance pour sauvegarder la race
-//            dump($race);die();
             $racePersistance->saveRace($race);
 
             return $redirection;
@@ -196,6 +195,9 @@ class RacesController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-        return $this->render("AdminBundle:Races:form.html.twig", $options);
+        if ($action === ActionEnum::ADD) {
+            return $this->render("AdminBundle:Races:form.html.twig", $options);
+        }
+        return $this->render("AdminBundle:Races:edit.html.twig", $options);
     }
 }

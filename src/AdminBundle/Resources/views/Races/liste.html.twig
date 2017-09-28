@@ -2,12 +2,19 @@
 
 {% block body %}
     <div class="blockBody">
-        <div class="blockTitre">
+        {#<div class="blockTitre">#}
             {#<div class="titrePage">Races</div>#}
-            <div class="btnForm"><a href="{{ path("admin_races") }}">Ajouter race</a></div>
+            {#<div class="btnForm"><a href="{{ path("admin_races") }}">Ajouter race</a></div>#}
+        {#</div>#}
+        <div class="btnForm">
+            <button class="ui button btnAddPost">Ajouter une race</button>
+            <button class="ui button btnDeletePost">Annuler</button>
         </div>
-        {% block form %}
-        {% endblock %}
+        <div class="formHidden">
+            {#{% render "AdminBundle:Post:form.html.twig" only %}#}
+            {{ render(controller("AdminBundle:Races:add", {request: app.request})) }}
+            {#{% include "AdminBundle:Post:test.html.twig" %}#}
+        </div>
         {% for race in races %}
             <div class="blocKContent ui padded segment">
                 <div class="contenuIcon">
