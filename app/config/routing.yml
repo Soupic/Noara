@@ -6,7 +6,7 @@ admin:
 page:
     resource: "@PageBundle/Controller/"
     type:     annotation
-    prefix:   /
+    prefix:   noara/
 
 app:
     resource: '@AppBundle/Controller/'
