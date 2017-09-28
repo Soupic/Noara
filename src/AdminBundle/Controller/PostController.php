@@ -165,7 +165,7 @@ class PostController extends Controller
             if ($action === ActionEnum::ADD) {
                 $post = $formService->getPostForAdd($form, $post);
 //                //Affectation de la redirection
-                $redirection = $this->forward("AdminBundle:Post:add");
+                $redirection = $this->forward("AdminBundle:Post:show");
             } else {
                 $post = $formService->getPostForAdd($form, $post);
 
