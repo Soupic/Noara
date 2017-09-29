@@ -15,6 +15,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 class PostForm
 {
@@ -90,10 +92,10 @@ class PostForm
                 ActionEnum::ADD
             )
         );
-        $form->add(
-            self::KEY_DATE,
-            DateTimeType::class
-        );
+//        $form->add(
+//            self::KEY_DATE,
+//            DateTimeType::class
+//        );
         $form->add(
             self::KEY_ACTIVE,
             CheckboxType::class,
@@ -176,7 +178,8 @@ class PostForm
         //Récupération des champ du formulaire
         $title = $this->getDataForm($form, self::KEY_TITLE);
         $content = $this->getDataForm($form, self::KEY_CONTENT);
-        $date = $this->getDataForm($form, self::KEY_DATE);
+//        $date = $this->getDataForm($form, self::KEY_DATE);
+        $date = new \DateTime();
         $active = $this->getDataForm($form, self::KEY_ACTIVE);
         //Attention MediaFile contient un tableau associatif
         $mediaFile = $this->getDataForm($form, self::KEY_FILES);

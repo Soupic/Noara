@@ -72,6 +72,16 @@ class Post
     }
 
     /**
+     * Get the string representation.
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getDate()->format('Y-m-d H:i:s');
+    }
+
+    /**
      * Get id
      *
      * @return int
