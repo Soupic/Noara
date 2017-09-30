@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  */
 class RacesController extends Controller
 {
+    const KEY_ENABLE = 1;
     /**
      * @Route("races/", name="show_races")
      * @return Response
@@ -179,6 +180,7 @@ class RacesController extends Controller
 
             //Appel du service de persistance pour sauvegarder la race
             $racePersistance->saveRace($race);
+//            dump("redirection");die();
 
             return $redirection;
         }
@@ -196,6 +198,7 @@ class RacesController extends Controller
         ];
 
         if ($action === ActionEnum::ADD) {
+            
             return $this->render("AdminBundle:Races:form.html.twig", $options);
         }
         return $this->render("AdminBundle:Races:edit.html.twig", $options);
