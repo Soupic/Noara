@@ -21,7 +21,7 @@ class CharactersController extends Controller
     {
         //Appel au service de dao
         $charactersDao = $this->get("noara.admin.dao.characters");
-        //Appel à la méhtode du Dao
+        //Appel à la méhtode du DAO
         $characters = $charactersDao->getAllCharacters();
         //Retourne la vue avec le personnage en paramètre
         return $this->render("AdminBundle:Characters:liste.html.twig", [
