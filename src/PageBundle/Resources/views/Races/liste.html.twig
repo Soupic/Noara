@@ -1,20 +1,7 @@
-{% extends "PageBundle:Admin:layout.html.twig" %}
+{% extends "PageBundle:layout.html.twig" %}
 
 {% block body %}
-    <div class="blockBody">
-        {% for race in races %}
-            <div class="blocKRace">
-                <div class="name">{{ race.name }}</div>
-                <div class="content">{{ race.content }}</div>
-                {% if race.active == 1 %}
-                    <div class="enable">Active</div>
-                {% else %}
-                    <div class="disabled">Désactivé</div>
-                {% endif %}
-                <div class="btnEdit"></div>
-                <div class="btnDisabled"></div>
-                <div class="btnDelete"></div>
-            </div>
-        {% endfor %}
-    </div>
+    {% block render %}
+        <script ></script>
+    {% endblock %}
 {% endblock %}
