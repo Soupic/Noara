@@ -10,9 +10,7 @@
                 <button class="ui button btnDeletePost">Annuler</button>
             </div>
             <div class="formHidden">
-                {#{% render "AdminBundle:Post:form.html.twig" only %}#}
-                {{ render(controller("AdminBundle:Post:add", {request: app.request})) }}
-                {#{% include "AdminBundle:Post:test.html.twig" %}#}
+                {{ render(controller("AdminBundle:Post:add", {"request": app.request})) }}
             </div>
         {#</div>#}
         {% for post in posts %}
