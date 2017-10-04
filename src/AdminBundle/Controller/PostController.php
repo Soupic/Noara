@@ -23,12 +23,12 @@ class PostController extends Controller
      */
     public function showAction()
     {
-        $postDao = $this->get("noara.admin.dao.post");
-        $posts = $postDao->getAllPost();
+            $postDao = $this->get("noara.admin.dao.post");
+            $posts = $postDao->getAllPost();
 
-        return $this->render("AdminBundle:Post:liste.html.twig", [
-            "posts" => $posts,
-        ]);
+            return $this->render("AdminBundle:Post:liste.html.twig", [
+                "posts" => $posts,
+            ]);
     }
 
     /**
@@ -156,26 +156,13 @@ class PostController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Appel au service de persistance
-            $postPersitance = $this->get("noara.admin.persistance.post");
+            $postPersistance = $this->get("noara.admin.persistance.post");
 
-            //Définition d'une variable de redirection
-            $redirection = null;
-
-            //Si c'est un ajout
-            if ($action === ActionEnum::ADD) {
-                $post = $formService->getPostForAdd($form, $post);
-//                //Affectation de la redirection
-                $redirection = $this->forward("AdminBundle:Post:show");
-            } else {
-                $post = $formService->getPostForAdd($form, $post);
-
-                $redirection = $this->redirectToRoute("show_posts");
-            }
-
+            $post = $formService->getPostForAdd($form, $post);
             //Appel à la méthode pour sauvegarder le post
-            $postPersitance->savePost($post);
+            $postPersistance->savePost($post);
 
-            return $redirection;
+            return $this->forward("AdminBundle:Post:add");
         }
 
         $options = [
