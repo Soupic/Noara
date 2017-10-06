@@ -22,17 +22,49 @@ class RacesController extends Controller
     const KEY_ENABLE = 1;
     /**
      * @Route("races/", name="show_races")
+     * @param Request $request
      * @return Response
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         //Appel au service de DAO
         $raceDao = $this->get("noara.admin.dao.races");
         //Appel la méthode d'affichage de la liste
         $races = $raceDao->getAllRaces();
 
+        $race = new Races();
+        
+        $action = 1;
+
+        //appel du service qu gère le formulaire
+        $formService = $this->get("noara.admin.form.races");
+        //Création du formulaire
+        $form = $formService->newForm($race, $action);
+        //Récupération de la requete
+        $form->handleRequest($request);
+
+        //Vérification si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Appel au service de persistance
+            $racePersistance = $this->get("noara.admin.persistance.races");
+
+                $race = $formService->getRaceForAdd($form, $race);
+            
+            //Appel du service de persistance pour sauvegarder la race
+            $racePersistance->saveRace($race);
+
+            return $this->redirectToRoute("show_races");
+        }
+        
         return $this->render("AdminBundle:Races:liste.html.twig", [
             "races" => $races,
+            "form" => $form->createView(),
+            "race" => $race,
+            "key_name" => RacesForm::KEY_NAME,
+            "key_content" => RacesForm::KEY_CONTENT,
+            "key_active" => RacesForm::KEY_ACTIVE,
+            "key_characters" => RacesForm::KEY_CHARACTERS,
+            "key_files" => RacesForm::KEY_FILES,
         ]);
 
     }
@@ -164,25 +196,13 @@ class RacesController extends Controller
             //Appel au service de persistance
             $racePersistance = $this->get("noara.admin.persistance.races");
 
-            //Création de la redirection
-            $redirection = null;
-
-            //Si c'est un ajout
-            if ($action === ActionEnum::ADD) {
                 $race = $formService->getRaceForAdd($form, $race);
-
-                $redirection = $this->forward("AdminBundle:Races:show");
-            } else {
-                $race = $formService->getRaceForAdd($form, $race);
-
-                $redirection = $this->redirectToRoute("show_races");
-            }
 
             //Appel du service de persistance pour sauvegarder la race
             $racePersistance->saveRace($race);
 //            dump("redirection");die();
 
-            return $redirection;
+            return $this->redirectToRoute("show_races");
         }
 
         $options = [
@@ -196,11 +216,7 @@ class RacesController extends Controller
             "ajouter" => $action === ActionEnum::ADD,
             "modifier" => $action === ActionEnum::EDIT,
         ];
-
-        if ($action === ActionEnum::ADD) {
-            
-            return $this->render("AdminBundle:Races:form.html.twig", $options);
-        }
+        
         return $this->render("AdminBundle:Races:edit.html.twig", $options);
     }
 }
