@@ -2,18 +2,12 @@
 
 {% block body %}
     <div class="blockBody">
-        {#<div class="blockTitre">#}
-            {#<div class="titrePage">Personnages</div>#}
-            {#<div class="btnForm"><a href="{{ path("admin_characters") }}">Ajouter personnage</a></div>#}
-        {#</div>#}
         <div class="btnForm">
             <button class="ui button btnAddPost">Ajouter un peronnage</button>
             <button class="ui button btnDeletePost">Annuler</button>
         </div>
         <div class="formHidden">
-            {#{% render "AdminBundle:Post:form.html.twig" only %}#}
-            {{ render(controller("AdminBundle:Characters:add", {request: app.request})) }}
-            {#{% include "AdminBundle:Post:test.html.twig" %}#}
+            {% include("AdminBundle:Characters:form.html.twig") %}
         </div>
         {% for character in characters %}
             <div class="blockContent ui padded segment">

@@ -15,17 +15,50 @@ class CharactersController extends Controller
 {
     /**
      * @Route("characters/", name="show_characters")
+     * @param Request $request
      * @return Response
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
         //Appel au service de dao
         $charactersDao = $this->get("noara.admin.dao.characters");
         //Appel à la méhtode du DAO
         $characters = $charactersDao->getAllCharacters();
+        
+        $character = new Characters();
+        
+        $action = 1;
+        
+        //appel du service qu gère le formulaire
+        $formService = $this->get("noara.admin.form.characters");
+        //Création du formulaire
+        $form = $formService->newForm($character, $action);
+        //Récupération de la requete
+        $form->handleRequest($request);
+
+        //Vérification si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Appel au service de persistance
+            $charactersPersistance = $this->get("noara.admin.persistance.characters");
+
+            $character = $formService->getCharactersForAdd($form, $character);
+
+            //Appel du service de persistance pour sauvegarder la race
+            $charactersPersistance->saveCharacters($character);
+
+            return $this->redirectToRoute("show_characters");
+        }
+        
         //Retourne la vue avec le personnage en paramètre
         return $this->render("AdminBundle:Characters:liste.html.twig", [
             "characters" => $characters,
+            "form" => $form->createView(),
+            "character" => $character,
+            "key_name" => CharactersForm::KEY_NAME,
+            "key_content" => CharactersForm::KEY_CONTENT,
+            "key_active" => CharactersForm::KEY_ACTIVE,
+            "key_files" => CharactersForm::KEY_FILES,
+            "ajouter" => $action === ActionEnum::ADD,
         ]);
     }
 
@@ -156,24 +189,12 @@ class CharactersController extends Controller
             //Appel au service de persistance
             $charactersPersistance = $this->get("noara.admin.persistance.characters");
 
-            //Création de la redirection
-            $redirection = null;
-
-            //Si c'est un ajout
-            if ($action === ActionEnum::ADD) {
                 $characters = $formService->getCharactersForAdd($form, $characters);
-
-                $redirection = $this->forward("AdminBundle:Characters:show");
-            } else {
-                $characters = $formService->getCharactersForAdd($form, $characters);
-
-                $redirection = $this->redirectToRoute("show_characters");
-            }
 
             //Appel du service de persistance pour sauvegarder la race
             $charactersPersistance->saveCharacters($characters);
-
-            return $redirection;
+            
+            return $this->redirectToRoute("show_characters");
         }
 
         $options = [
@@ -187,9 +208,6 @@ class CharactersController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-        if ($action === ActionEnum::ADD) {
-            return $this->render("AdminBundle:Characters:form.html.twig", $options);
-        }
         return $this->render("AdminBundle:Characters:edit.html.twig", $options);
     }
 }
