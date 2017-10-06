@@ -1,7 +1,13 @@
 {% extends "AdminBundle::layout.html.twig" %}
 {% block body %}
-    <a href="{{ path("show_posts") }}">Posts</a>
-    <a href="{{ path("show_races") }}">Races</a>
-    <a href="{{ path("show_characters") }}">Personnages</a>
+    <div>
+        {{ render(controller("AdminBundle:Post:add"), {request : app.request}) }}
+    </div>
+    {#<div>#}
+        {#{{ render(controller("AdminBundle:Races:add"), {request : app.request}) }}#}
+    {#</div>#}
+    {#<div>#}
+        {#{{ render(controller("AdminBundle:Characters:add"), {request : app.request}) }}#}
+    {#</div>#}
 {% endblock %}
 

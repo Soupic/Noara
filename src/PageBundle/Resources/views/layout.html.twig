@@ -5,30 +5,18 @@
     <title>{% block title %}Administration Noara{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset("bundles/admin/css/style.css") }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-</head>
-<div class="container ui grid">
-    <div class="headerPage">
-        <div class="blkTitrePage fifteen wide"><h1 class="ui header">{% block titre_page %}Administration{% endblock %}</h1></div>
-        {#<div class="bltBoutonPage one wide">{% block titre_bouton %}<a href="{{ path("admin_accueil") }}"><i class="home icon big right attached"></i></a>{% endblock %}</div>#}
-        <div class="ui three buttons">
-            <a href="{{ path("show_posts") }}" class="ui button">Articles</a>
-            <a href="{{ path("show_races") }}" class="ui  button">Races</a>
-            <a href="{{ path("show_characters") }}" class="ui button">Personnages</a>
-        </div>
-    </div>
-
-
-    {% block body %}
-        {% block render %} {% endblock %}
-    {% endblock %}
-</div>
-{# Footer #}
-{% block javascript %}
+    <script src="{{ asset("bundles/page/js/Script/script.js") }}"></script>
     <script
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+</head>
+{% block body %}
+{% endblock %}
+{# Footer #}
+{% block javascript %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    {#<script src="{{ asset("bundles/page/js/Script/script.js") }}"></script>#}
 {% endblock %}
 
 </body>

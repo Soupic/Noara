@@ -2,19 +2,40 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Refresh" content="true" />
     <title>{% block title %}Administration Noara{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ asset("bundles/admin/css/style.css") }}">
+    {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/admin/css/semantic.min.css") }}">#}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
+    <script src="{{ asset("bundles/admin/js/jquery.min.js") }}"></script>
+    <script src="{{ asset("bundles/admin/js/semantic.min.js") }}"></script>
+
 </head>
 <div class="container ui grid">
     <div class="headerPage">
         <div class="blkTitrePage fifteen wide"><h1 class="ui header">{% block titre_page %}Administration{% endblock %}</h1></div>
         {#<div class="bltBoutonPage one wide">{% block titre_bouton %}<a href="{{ path("admin_accueil") }}"><i class="home icon big right attached"></i></a>{% endblock %}</div>#}
         <div class="ui three buttons">
+            {#<a href="{{ path("admin_accueil") }}" class="ui button">Accueil</a>#}
             <a href="{{ path("show_posts") }}" class="ui button">Articles</a>
             <a href="{{ path("show_races") }}" class="ui  button">Races</a>
             <a href="{{ path("show_characters") }}" class="ui button">Personnages</a>
         </div>
+        {#<div class="ui secondary vertical menu">#}
+            {#<a href="{{ path("admin_accueil") }}"  class="active item">#}
+                {#Accueil#}
+            {#</a>#}
+            {#<div class="ui dropdown item">#}
+                {#<i class="dropdown icon"></i>#}
+                {#Articles#}
+                {#<div class="menu">#}
+                    {#<div class="header">Text Size</div>#}
+                    {#<a  href="{{ path("new_post") }}" class="item">Ajouter un article</a>#}
+                    {#<a class="item">Medium</a>#}
+                    {#<a class="item">Large</a>#}
+                {#</div>#}
+            {#</div>#}
+        {#</div>#}
     </div>
 
 
@@ -28,7 +49,7 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>#}
     <script src="{{ asset('bundles/admin/js/menu.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/showForm.js') }}"></script>
     <script src="{{ asset('bundles/admin/js/refresh.js') }}"></script>

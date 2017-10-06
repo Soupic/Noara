@@ -30,15 +30,15 @@ class RacesController extends Controller
             $test[] = $race;
         };
 
-        dump($test);
-        die();
+//        dump($test);
+//        die();
 //        $datas = [
 //          "nom" => $races,
 //        ];
 
-        return new JsonResponse($test);
-//        return $this->render("PageBundle:Races:liste.html.twig", [
-//            "races" => $races,
-//        ]);
+//        return new JsonResponse($test);
+        return $this->render("PageBundle:Races:liste.html.twig", [
+            "races" => $races,
+        ]);
     }
 }
