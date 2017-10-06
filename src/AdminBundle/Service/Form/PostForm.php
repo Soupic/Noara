@@ -139,10 +139,6 @@ class PostForm
             )
         );
         $form->add(
-            self::KEY_DATE,
-            DateTimeType::class
-        );
-        $form->add(
             self::KEY_ACTIVE,
             CheckboxType::class,
             $this->getOptionFieldActive(

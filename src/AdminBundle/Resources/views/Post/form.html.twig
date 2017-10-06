@@ -1,4 +1,7 @@
-{% block body %}
+{#{% block body %}#}
+{#{{ dump(fieldForm.form) }}#}
+{#{% for form in fieldForm %}#}
+    {#{{ dump(post) }}#}
     {{ form_start(form, {"attr":
         {
             "class" : "ui form",
@@ -13,11 +16,6 @@
                 {{ form_widget(form[key_title]) }}
                 {{ form_errors(form[key_title]) }}
             </div>
-            {#<div class="field">#}
-                {#{{ form_label(form[key_date]) }}#}
-                {#{{ form_widget(form[key_date]) }}#}
-                {#{{ form_errors(form[key_date]) }}#}
-            {#</div>#}
             <div class="field">
                 {{ form_label(form[key_active]) }}
                 {{ form_widget(form[key_active]) }}
@@ -28,11 +26,11 @@
                 {{ form_widget(form[key_content]) }}
                 {{ form_errors(form[key_content]) }}
             </div>
-                <div class="field">
-                    {{ form_label(form[key_files]) }}
-                    {{ form_widget(form[key_files]) }}
-                    {{ form_errors(form[key_files]) }}
-                </div>
+            <div class="field">
+                {{ form_label(form[key_files]) }}
+                {{ form_widget(form[key_files]) }}
+                {{ form_errors(form[key_files]) }}
+            </div>
         </div>
     </div>
     <div class="fields aes-btn-bottom">
@@ -44,4 +42,5 @@
         </div>
     </div>
     {{ form_end(form) }}
-{% endblock %}
+{#{% endfor %}#}
+{#{% endblock %}#}

@@ -19,16 +19,47 @@ class PostController extends Controller
 {
     /**
      * @Route("posts/", name="show_posts")
+     * @param Request $request
      * @return Response
      */
-    public function showAction()
+    public function showAction(Request $request)
     {
-            $postDao = $this->get("noara.admin.dao.post");
-            $posts = $postDao->getAllPost();
+        $postDao = $this->get("noara.admin.dao.post");
+        $posts = $postDao->getAllPost();
 
-            return $this->render("AdminBundle:Post:liste.html.twig", [
-                "posts" => $posts,
-            ]);
+        $post = new Post();
+
+        $action = 1;
+
+        //Appel au service qui gère le formulaire
+        $formService = $this->get("noara.admin.form.post");
+        //Appel au formulaire l'ajout
+        $form = $formService->newForm($post, $action);
+
+        //Récupération de la requete
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Appel au service de persistance
+            $postPersistance = $this->get("noara.admin.persistance.post");
+
+            $post = $formService->getPostForAdd($form, $post);
+            //Appel à la méthode pour sauvegarder le post
+            $postPersistance->savePost($post);
+
+            return $this->redirectToRoute("show_posts");
+
+        }
+
+        return $this->render("AdminBundle:Post:liste.html.twig", [
+            "posts" => $posts,
+            "form" => $form->createView(),
+            "key_title" => PostForm::KEY_TITLE,
+            "key_content" => PostForm::KEY_CONTENT,
+            "key_active" => PostForm::KEY_ACTIVE,
+            "key_date" => PostForm::KEY_DATE,
+            "key_files" => PostForm::KEY_FILES,
+        ]);
     }
 
     /**
@@ -67,14 +98,14 @@ class PostController extends Controller
         return $this->redirectToRoute("show_posts");
     }
 
-    /**
-     * @Route(
-     *     "newPost/",
-     *     name="new_post"
-     * )
-     * @param Request $request
-     * @return mixed
-     */
+//    /**
+//     * @Route(
+//     *     "newPost/",
+//     *     name="new_post"
+//     * )
+//     * @param Request $request
+//     * @return mixed
+//     */
     public function addAction(Request $request)
     {
         //Création de l'instance du post
@@ -162,7 +193,9 @@ class PostController extends Controller
             //Appel à la méthode pour sauvegarder le post
             $postPersistance->savePost($post);
 
-            return $this->forward("AdminBundle:Post:add");
+//            dump($request);die();
+            return $this->redirectToRoute("show_posts");
+
         }
 
         $options = [
@@ -177,9 +210,34 @@ class PostController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-        if ($action === ActionEnum::ADD) {
-            return $this->render("AdminBundle:Post:form.html.twig", $options);
-        }
+//        dump($options);die();
         return $this->render("AdminBundle:Post:edit.html.twig", $options);
+
+//        return $this->optionForFieldForm($form, $post, $action);
+    }
+    /**
+     * @param $form
+     * @param Post $post
+     * @param $action
+     * @return array
+     */
+    private function optionForFieldForm
+    (
+        $form,
+        Post $post,
+        $action
+    )
+    {
+        return $options = [
+            "form" => $form->createView(),
+            "post" => $post,
+            "key_title" => PostForm::KEY_TITLE,
+            "key_content" => PostForm::KEY_CONTENT,
+            "key_active" => PostForm::KEY_ACTIVE,
+            "key_date" => PostForm::KEY_DATE,
+            "key_files" => PostForm::KEY_FILES,
+            "ajouter" => $action === ActionEnum::ADD,
+            "modifier" => $action === ActionEnum::EDIT,
+        ];
     }
 }
