@@ -1,7 +1,3 @@
-{#{% block body %}#}
-{#{{ dump(fieldForm.form) }}#}
-{#{% for form in fieldForm %}#}
-    {#{{ dump(post) }}#}
     {{ form_start(form, {"attr":
         {
             "class" : "ui form",
@@ -42,5 +38,3 @@
         </div>
     </div>
     {{ form_end(form) }}
-{#{% endfor %}#}
-{#{% endblock %}#}

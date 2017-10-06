@@ -210,34 +210,6 @@ class PostController extends Controller
             "modifier" => $action === ActionEnum::EDIT,
         ];
 
-//        dump($options);die();
         return $this->render("AdminBundle:Post:edit.html.twig", $options);
-
-//        return $this->optionForFieldForm($form, $post, $action);
-    }
-    /**
-     * @param $form
-     * @param Post $post
-     * @param $action
-     * @return array
-     */
-    private function optionForFieldForm
-    (
-        $form,
-        Post $post,
-        $action
-    )
-    {
-        return $options = [
-            "form" => $form->createView(),
-            "post" => $post,
-            "key_title" => PostForm::KEY_TITLE,
-            "key_content" => PostForm::KEY_CONTENT,
-            "key_active" => PostForm::KEY_ACTIVE,
-            "key_date" => PostForm::KEY_DATE,
-            "key_files" => PostForm::KEY_FILES,
-            "ajouter" => $action === ActionEnum::ADD,
-            "modifier" => $action === ActionEnum::EDIT,
-        ];
     }
 }
