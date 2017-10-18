@@ -59,12 +59,37 @@ class RacesRepository extends EntityRepository
         return $qb->getQuery();
     }
 
+    /**
+     * @param $isActivate
+     * @return Query
+     */
     public function getCountEnableRace($isActivate)
     {
         $qb = $this->createQueryBuilder("races");
 
         $qb
             ->select("races")
+            ->where($qb->expr()->eq("races.active", ":isActivate"))
+            ->setParameter("isActivate", $isActivate)
+        ;
+
+        return $qb->getQuery();
+    }
+
+    /**
+     * @param $isActivate
+     * @return Query
+     */
+    public function getEnableRace($isActivate)
+    {
+        $qb = $this->createQueryBuilder("races");
+
+        $qb
+            ->addSelect(
+                "races",
+                "media"
+            )
+            ->leftJoin("races.media", "media")
             ->where($qb->expr()->eq("races.active", ":isActivate"))
             ->setParameter("isActivate", $isActivate)
         ;
