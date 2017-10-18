@@ -6,6 +6,7 @@ namespace PageBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 
 /**
@@ -22,21 +23,13 @@ class RacesController extends Controller
      */
     public function showRaceEnableAction()
     {
+        //Appel du DAO des races
         $raceDao = $this->get("noara.dao.races");
-        $races = $raceDao->getCountEnableRace(self::KEY_ENABLE);
+        //Utilisation de la méthode pour compté le nombre de races active
+        $races = $raceDao->getEnableRace(self::KEY_ENABLE);
 //        dump($races);die();
 
-        foreach ($races as $race) {
-            $test[] = $race;
-        };
-
-//        dump($test);
-//        die();
-//        $datas = [
-//          "nom" => $races,
-//        ];
-
-//        return new JsonResponse($test);
+        //Envois des races récupéré à la vue pour traitement
         return $this->render("PageBundle:Races:liste.html.twig", [
             "races" => $races,
         ]);
