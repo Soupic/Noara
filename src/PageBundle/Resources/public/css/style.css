@@ -1,0 +1,99 @@
+/*********************/
+/*       SLIDER      */
+/*********************/
+.global {
+    height: 500px;
+    overflow: hidden;
+}
+
+#galerie {
+    position: relative;
+    background: url("../img/Background_5.jpg");
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    width: 1903px;
+    background-size: cover;
+}
+
+.slider {
+    display: flex;
+    position: absolute;
+}
+
+#galerie .slider-content {
+    display: flex;
+    padding-left : 7em;
+    width: 1903px;
+}
+
+.suiv {
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.prec {
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+
+.suiv:hover {
+    background: #0f0f10;
+}
+
+.prec:hover {
+    background: #0f0f10;
+}
+
+.content-race {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 7em;
+}
+
+.content {
+    font-size: 22px;
+}
+
+.content-race p:first-child {
+    font-size: 2em;
+    margin: 0;
+}
+
+.content-race p:nth-child(2) {
+    font-size: 7em;
+    margin-left: 1em;
+    margin-bottom: 0;
+}
+
+.content-race div:last-child {
+    align-content: flex-end;
+}
+
+.slider-content > img {
+    margin-left: 7em;
+}
+
+.button::before {
+    height: 10px;
+    width: 100px;
+    background: orange;
+    content: "";
+}
+
+.button {
+    background-color: #00B5AD;
+    width: 9em;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@font-face {
+    font-family: 'Shkoder 1989';
+    src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
+}
