@@ -2,21 +2,22 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width" />
     <title>{% block title %}Administration Noara{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/admin/css/style.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/style.css") }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-    <script src="{{ asset("bundles/page/js/Script/script.js") }}"></script>
-    <script
-            src="https://code.jquery.com/jquery-3.2.1.min.js"
-            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-            crossorigin="anonymous"></script>
+    <script src="{{ asset("bundles/admin/js/jquery.min.js") }}"></script>
 </head>
 {% block body %}
 {% endblock %}
 {# Footer #}
 {% block javascript %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>
-    {#<script src="{{ asset("bundles/page/js/Script/script.js") }}"></script>#}
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    {#<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>#}
+    <script src="{{ asset("bundles/page/js/Script/script.js") }}" type="text/javascript"></script>
 {% endblock %}
 
 </body>
