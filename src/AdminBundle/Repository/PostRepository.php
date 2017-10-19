@@ -71,4 +71,25 @@ class PostRepository extends EntityRepository
 
         return $qb->getQuery();
     }
+
+    /**
+     * @param $isActivate
+     * @return Query
+     */
+    public function getEnablePost($isActivate)
+    {
+        $qb = $this->createQueryBuilder("post");
+
+        $qb
+            ->addSelect(
+                "post",
+                "media"
+            )
+            ->leftJoin("post.media","media")
+            ->where($qb->expr()->eq("post.active", ":isActivate"))
+            ->setParameter('isActivate', $isActivate)
+        ;
+
+        return $qb->getQuery();
+    }
 }

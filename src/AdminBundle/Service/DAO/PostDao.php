@@ -91,4 +91,26 @@ class PostDao extends AbstractMasterDAO
         }
 
     }
+
+    /**
+     * @param $isActivate
+     * @return ArrayCollection
+     * @throws ArchitectureException
+     */
+    public function getEnablePost($isActivate)
+    {
+        try {
+            $repo = $this->entity->getRepository(self::NAME_REPO);
+
+            $query = $repo->getEnablePost($isActivate);
+
+            return new ArrayCollection($query->getResult());
+        } catch ( _Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupérer la liste des post activé, avec leurs images",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }
