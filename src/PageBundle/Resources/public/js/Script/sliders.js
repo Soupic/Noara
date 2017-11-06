@@ -25,8 +25,9 @@ var slider = function(id) {
     });
     this.prec = this.div.find(".prec");
     this.suiv = this.div.find(".suiv");
-    this.saut = this.largeurCache;
-    this.nbEtapes = Math.ceil(this.largeur/this.saut - this.largeurCache/this.saut);
+    this.saut = this.largeurCache + 1;
+    // this.nbEtapes = Math.ceil(this.largeur/this.saut - this.largeurCache/this.saut);
+    this.nbEtapes = this.largeur/this.saut - this.largeurCache/this.saut;
     this.courant = 0;
 
     this.suiv.click(function(){

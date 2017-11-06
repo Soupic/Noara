@@ -1,0 +1,150 @@
+/*********************/
+/*       SLIDER      */
+/*********************/
+/*.global {*/
+    /*height: 500px;*/
+    /*overflow: hidden;*/
+/*}*/
+
+@media screen and (max-width: 767px) {
+    #galerie {
+        background: url("../img/Background_5.jpg");
+        position: relative;
+        /*background: url("../img/Background_5.jpg");*/
+        height: 480px;
+        overflow-x: hidden;
+        overflow-y: visible;
+        width: 320px;
+    }
+
+    .suiv {
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+
+    .prec {
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+
+    /****************************/
+    /*    CSS partie article    */
+    /****************************/
+
+    .content-post {
+        align-items: center;
+    }
+
+    .content-post p {
+        font-size: large;
+        color: white;
+        font-family: 'Shkoder 1989';
+        src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
+    }
+
+    .content-post img {
+        width: 250px;
+    }
+
+    .slider-post, .slider-races {
+        display: flex;
+        padding-left : 2em;
+        padding-right: 1.5em;
+        margin-top: 2.5em;
+        width: 320px;
+    }
+}
+
+/*#galerie {*/
+    /*position: relative;*/
+    /*!*background: url("../img/Background_5.jpg");*!*/
+    /*height: 500px;*/
+    /*overflow-x: hidden;*/
+    /*overflow-y: visible;*/
+    /*width: 1903px;*/
+    /*background-size: cover;*/
+/*}*/
+
+.slider {
+    display: flex;
+    position: absolute;
+}
+
+/*.slider-content, .slider-content-post, .slider-content-race {*/
+    /*display: flex;*/
+    /*padding-left : 7em;*/
+    /*width: 1903px;*/
+/*}*/
+
+.suiv {
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.prec {
+    position: absolute;
+    top: 50%;
+    left: 0;
+}
+
+.suiv:hover {
+    background: #0f0f10;
+}
+
+.prec:hover {
+    background: #0f0f10;
+}
+
+.content-character {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 7em;
+}
+
+/*.content {*/
+    /*font-size: 22px;*/
+/*}*/
+
+.content-character p:first-child {
+    font-size: 2em;
+    margin: 0;
+}
+
+.content-character p:nth-child(2) {
+    font-size: 7em;
+    margin-left: 1em;
+    margin-bottom: 0;
+}
+
+.content-character div:last-child {
+    align-content: flex-end;
+}
+
+.slider-content-character > img {
+    margin-left: 7em;
+}
+
+.button::before {
+    height: 10px;
+    width: 100px;
+    background: orange;
+    content: "";
+}
+
+.button {
+    background-color: #00B5AD;
+    width: 9em;
+    height: 2.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@font-face {
+    font-family: 'Shkoder 1989';
+    src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
+}

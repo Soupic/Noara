@@ -1,0 +1,9 @@
+.navbar {
+    height: 3em;
+    display: flex;
+}
+
+a {
+    font-family: 'Shkoder 1989';
+    src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
+}

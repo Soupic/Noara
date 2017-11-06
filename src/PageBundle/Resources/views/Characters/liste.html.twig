@@ -1,0 +1,22 @@
+{% extends "PageBundle::layout.html.twig" %}
+
+{% block body %}
+    <div class="global">
+        <div id="galerie">
+            <div class="slider">
+                {% for character in characters %}
+                    <div class="slider-content slider-characters">
+                        <img src="{{ asset(character.media.webPath) }}" alt="image de {{ character.name }}">
+                        <div class="content-character">
+                            <p>{{ character.content }}</p>
+                            <p>{{ character.name }}</p>
+                            <div class="button">Voir</div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <i class="medium right chevron icon orange suiv"></i>
+            <i class="medium left chevron icon orange prec"></i>
+        </div>
+    </div>
+{% endblock %}
