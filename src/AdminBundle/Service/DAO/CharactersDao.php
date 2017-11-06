@@ -89,4 +89,26 @@ class CharactersDao extends AbstractMasterDAO
             );
         }
     }
+
+    /**
+     * @param int $isActivate
+     * @return ArrayCollection
+     * @throws ArchitectureException
+     */
+    public function getEnableCharacter($isActivate)
+    {
+        try {
+            $repo = $this->entity->getRepository(self::NAME_REPO);
+
+            $query = $repo->getEnableCharacter($isActivate);
+
+            return new ArrayCollection($query->getResult());
+        } catch (\Exception $exception) {
+            throw new ArchitectureException(
+                "Impossible de récupérer la liste des personnages actif",
+                "TODO",
+                $exception
+            );
+        }
+    }
 }
