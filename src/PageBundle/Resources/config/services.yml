@@ -26,3 +26,10 @@ services:
       shared: true
       arguments:
           - "@doctrine.orm.entity_manager"
+
+    noara.dao.characters:
+          class: AdminBundle\Service\DAO\CharactersDao
+          lazy: true
+          shared: true
+          arguments:
+              - "@doctrine.orm.entity_manager"
