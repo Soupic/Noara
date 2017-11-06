@@ -9,7 +9,6 @@
             <div class="formHidden">
                 {% include("AdminBundle:Post:form.html.twig") %}
             </div>
-        {{ dump(app.session.flashBag.all) }}
         {% for post in posts %}
             <div class="blockContent ui padded segment">
                 <div class="contenuIcon">

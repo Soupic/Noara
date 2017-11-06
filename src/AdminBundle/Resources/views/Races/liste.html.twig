@@ -35,21 +35,18 @@
                     </div>
                 </div>
                 <div class="contenuEcrit">
-                    <div class="name">{{ race.name }}</div>
-                    <div class="content">{{ race.content }}</div>
                     {% if race.active == 1 %}
-                        <div class="enable">Active</div>
+                        <div class="enable">Race visible dans le slider</div>
                     {% else %}
-                        <div class="disabled">Désactivé</div>
+                        <div class="disabled">Race non visible dans le slider</div>
                     {% endif %}
+                    <div class="name">Nom de la race : {{ race.name }}</div>
+                    <div class="content">Description de la race : {{ race.content }}</div>
                     {% if race.media is not null %}
                         <div class="img">
                             <img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}">
                         </div>
                     {% endif %}
-                    <div class="btnEdit"><a href="{{ path("admin_races_edit", {"idRaces" : race.id}) }}">Modification</a></div>
-                    <div class="btnDisabled"></div>
-                    <div class="btnDelete"><a href="{{ path("admin_races_deleted", {"idRaces" : race.id}) }}">Supprimer</a></div>
                 </div>
                 </div>
         {% endfor %}
