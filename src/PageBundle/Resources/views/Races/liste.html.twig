@@ -1,32 +1,23 @@
 {% extends "PageBundle::layout.html.twig" %}
 
 {% block body %}
-    {#<div class="slideshow-title">{{ race.name }}</div>#}
-    {#<div class="slidesho-contentw">{{ race.content }}</div>#}
-    {#<div>#}
-    {#<img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}" class="blk-img">#}
-    {#</div>#}
-    {#<ul>#}
-    {#<li><img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}"></li>#}
-    {#<li>{{ race.name }}</li>#}
-    {#<li>{{ race.content }}</li>#}
-    {#</ul>#}
-    <div class="global">
+    {#<div class="global">#}
         <div id="galerie">
             <div class="slider">
                 {% for race in races %}
-                    <div class="slider-content">
-                        <img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}">
-                        <div class="content-race">
-                            <p>{{ race.content }}</p>
+                    <div class="slider-content slider-races">
+                        <div class="content-race ">
                             <p>{{ race.name }}</p>
+                            <p>{{ race.content }}</p>
                             <div class="button">Voir</div>
                         </div>
+                        {{ dump(race) }}
+                        <img src="{{ asset(race.media.webPath) }}" alt="image de {{ race.name }}">
                     </div>
                 {% endfor %}
             </div>
             <i class="medium right chevron icon orange suiv"></i>
             <i class="medium left chevron icon orange prec"></i>
         </div>
-    </div>
+    {#</div>#}
 {% endblock %}
