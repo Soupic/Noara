@@ -6,24 +6,21 @@
     /*overflow: hidden;*/
 /*}*/
 
-@media screen and (max-width: 767px) {
-    #galerie {
+@media screen and (max-width: 480px) {
+    #carrousel {
         background: url("../img/Background_5.jpg");
         position: relative;
-        /*background: url("../img/Background_5.jpg");*/
         height: 480px;
-        overflow-x: hidden;
-        overflow-y: visible;
-        width: 320px;
+        width: 100%;
     }
 
-    .suiv {
+    .next {
         position: absolute;
         top: 50%;
         right: 0;
     }
 
-    .prec {
+    .prev {
         position: absolute;
         top: 50%;
         left: 0;
@@ -33,19 +30,28 @@
     /*    CSS partie article    */
     /****************************/
 
-    .content-post {
-        align-items: center;
+    .content-post-slider {
+        width: auto;
+        height: auto;
+        margin: 2.5em 2em 0px 5.5em;
+        flex-direction: column;
     }
 
-    .content-post p {
+    .post-title {
+        padding-bottom: 20px;
+    }
+
+    .post-title, .post-content{
         font-size: large;
         color: white;
         font-family: 'Shkoder 1989';
         src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
     }
 
-    .content-post img {
+    .post-img img {
         width: 250px;
+        height: auto;
+        margin-bottom: 2.5em;
     }
 
     .slider-post, .slider-races {
@@ -57,15 +63,85 @@
     }
 }
 
-/*#galerie {*/
-    /*position: relative;*/
-    /*!*background: url("../img/Background_5.jpg");*!*/
-    /*height: 500px;*/
-    /*overflow-x: hidden;*/
-    /*overflow-y: visible;*/
-    /*width: 1903px;*/
-    /*background-size: cover;*/
-/*}*/
+@media screen and (max-width: 767px) {
+    #carrousel {
+        background: url("../img/Background_5.jpg");
+        position: relative;
+        /*background: url("../img/Background_5.jpg");*/
+        height: 100%;
+        /*overflow-x: hidden;*/
+        /*overflow-y: visible;*/
+        width: 100%;
+    }
+
+    #carrousel div {
+        display: flex;
+    }
+
+    .next {
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+
+    .prev {
+        position: absolute;
+        top: 50%;
+        left: 0;
+    }
+
+    /****************************/
+    /*    CSS partie article    */
+    /****************************/
+
+    .content-post-slider {
+        flex-direction: column;
+        margin: 2.5em 2em 0em 5em;
+    }
+
+    .post-title {
+        padding-bottom: 35px;
+    }
+
+    .post-title, .post-content{
+        font-size: large;
+        color: white;
+        font-family: 'Shkoder 1989';
+        src: url('/Fonts/Shkoder 1989 Black.eot') format('eot');
+    }
+
+    /*.post-head img {*/
+        /*float: left;*/
+    /*}*/
+
+    .post-img img {
+        width: 350px;
+        height: auto;
+        float: left;
+    }
+
+    .post-content p {
+        margin-left: 25px;
+    }
+
+    .slider-post, .slider-races {
+        display: flex;
+        padding-left : 2em;
+        padding-right: 1.5em;
+        margin-top: 2.5em;
+        width: 320px;
+    }
+}
+
+#carrousel {
+    position: relative;
+    background: url("../img/Background_5.jpg");
+    height: 500px;
+    overflow-x: hidden;
+    overflow-y: visible;
+    width: 100%;
+    background-size: cover;
+}
 
 .slider {
     display: flex;
@@ -78,13 +154,13 @@
     /*width: 1903px;*/
 /*}*/
 
-.suiv {
+.next {
     position: absolute;
     top: 50%;
     right: 0;
 }
 
-.prec {
+.prev {
     position: absolute;
     top: 50%;
     left: 0;

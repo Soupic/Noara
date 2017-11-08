@@ -2,25 +2,47 @@
 
 {% block body %}
     {#<div class="global">#}
-        <div id="galerie">
-            <div class="slider">
-                {% for post in posts %}
-                    <div class="slider-content slider-post">
-                        <div class="content-post">
-                            <p>{{ post.title }}</p>
-                            <p>posté le : {{ post.date|date("d/m/Y") }}</p>
+        {#<div id="galerie">#}
+            {#<div class="slider">#}
+                {#{% for post in posts %}#}
+                    {#<div class="slider-content slider-post">#}
+                        {#<div class="content-post">#}
+                            {#<p>{{ post.title }}</p>#}
+                            {#<p>posté le : {{ post.date|date("d/m/Y") }}</p>#}
                             {#Condition si une image est présente dans l'article#}
-                            {% if post.media == true %}
-                                <img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">
-                            {% endif %}
-                            <p>{{ post.content }}</p>
+                            {#{% if post.media == true %}#}
+                                {#<img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">#}
+                            {#{% endif %}#}
+                            {#<p>{{ post.content }}</p>#}
                             {#<div class="button">Voir</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                {#{% endfor %}#}
+            {#</div>#}
+            {#<i class="medium right chevron icon orange suiv"></i>#}
+            {#<i class="medium left chevron icon orange prec"></i>#}
+        {#</div>#}
+    <div id="carrousel">
+        {% for post in posts %}
+            <div class="content-post-slider">
+                <div class="post-title">
+                    {{ post.title }} du :
+                    {{ post.date|date("d/m/Y") }}
+                </div>
+                {#Condition si une image est présente dans l'article#}
+                <div class="post-content">
+                    {% if post.media == true %}
+                        <div class="post-img">
+                            <img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endif %}
+                    <p>{{ post.content }}</p>
+                </div>
             </div>
-            <i class="medium right chevron icon orange suiv"></i>
-            <i class="medium left chevron icon orange prec"></i>
-        </div>
+            {#<img src="{{ asset(post.media.webPath) }}" alt="image de {{ post.title }}">#}
+        {% endfor %}
+        <i class="medium left chevron icon orange prev"></i>
+        <i class="medium right chevron icon orange next"></i>
+    </div>
     {#</div>#}
 {% endblock %}
