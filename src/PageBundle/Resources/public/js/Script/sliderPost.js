@@ -5,16 +5,16 @@
 $( document ).ready(function() {
     s = new slider("#galerie");
 
-    var $carrousel = $('#carrousel'), // on cible le bloc du carrousel
-        $img = $('#carrousel .content-post-slider'), // on cible les images contenues dans le carrousel
+    var $carrouselPost = $('#carrousel-post'), // on cible le bloc du carrousel
+        $img = $('#carrousel-post .content-post-slider'), // on cible les images contenues dans le carrousel
         indexImg = $img.length - 1, // on définit l'index du dernier élément
         i = 0, // on initialise un compteur
         $currentImg = $img.eq(i); // enfin, on cible l'image courante, qui possède l'index i (0 pour l'instant)
 
     // $img.css('display', 'none'); //  on cache les images
     $img.hide(); //  on cache les images
-    // $currentImg.css('display', 'flex'); // on affiche seulement l'image courante
     $currentImg.show(); // on affiche seulement l'image courante
+    // $currentImg.show(); // on affiche seulement l'image courante
 
     // $carrousel.append('<div class="controls"> <span class="prev">Precedent</span> <span class="next">Suivant</span> </div>');
 
@@ -45,7 +45,7 @@ $( document ).ready(function() {
             $img.hide();
             $currentImg = $img.eq(i);
             // $currentImg.css('display', 'flex');
-            $currentImg.slideUp().fadeIn("slow");
+            $currentImg.slideUp().fadeIn(600);
 }
         else{
             i = 0;
