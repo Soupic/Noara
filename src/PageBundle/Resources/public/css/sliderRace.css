@@ -51,6 +51,10 @@
     top: 50%;
     right: 20px;
     color: black;
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 3px;
 }
 
 .prev {
@@ -58,9 +62,24 @@
     top: 50%;
     left: 20px;
     color: black;
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 3px;
 }
 
-.prev:hover .next:hover {
+.next .prev {
+}
+
+.prev:before {
+    margin-left: 14px
+}
+
+.next:before {
+    margin-left: 17px;
+}
+
+.prev:before:hover {
     opacity: 0.5;
 }
 
@@ -125,10 +144,7 @@
     .race-content {
         display: flex;
         flex-direction: column;
-        /*justify-content: center;*/
-        /*align-items: center;*/
-        /*text-align: justify;*/
-        padding-left: 10%;
+        padding-left: 5%;
         padding-right: 10%;
     }
 
@@ -143,6 +159,10 @@
         text-transform: uppercase;
         margin-bottom: 15px;
         font-size: 13px;
+    }
+
+    .prev {
+        left: 0;
     }
 }
 
@@ -192,6 +212,40 @@
     }
 }
 
-@media screen and (min-width: 1980px) {
-    
+@media screen and (min-width: 1081px) {
+    #race-name {
+        width: 60%;
+        letter-spacing: 10px; /*Espace entre chaque lettres*/
+        font-size: 76px;
+        margin-bottom: 25px;
+    }
+
+    .content-race-slider img {
+        padding-right: 30%;
+        margin-right: 0;
+        width: 860px;
+    }
+
+    .race-content {
+        padding-right: 0;
+        margin-right: -120px;
+    }
+
+    .next {
+        right: 250px;
+    }
+
+    #race-name {
+        font-size: 65px;
+    }
+
+    #content {
+        width: 65%;
+        font-size: 17px;
+    }
+
+    .line {
+        width: 40px;
+        margin-left: -40px;
+    }
 }
