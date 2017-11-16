@@ -1,8 +1,20 @@
 {% extends "PageBundle::layout.html.twig" %}
 
+{% block block_css %}
+    {{ parent() }}
+{% endblock %}
+
+{% block slider_js %}
+    {{ parent() }}
+{% endblock %}
+
+
 {% block body %}
     <div id="actus">
-        {% include "PageBundle:Default:newPage.html.twig" %}
+        {#{% include "PageBundle:Posts:liste.html.twig" with {"posts" : "posts"} %}#}
+        {% for post in posts %}
+            {{ include('PageBundle:Posts:liste.html.twig', {"posts" : posts}) }}
+        {% endfor %}
     </div>
     <div id="histoire">
 

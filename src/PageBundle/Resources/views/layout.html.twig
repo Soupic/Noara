@@ -2,14 +2,19 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Administration Noara{% endblock %}</title>
     {% block block_css %}
-        <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliders.css") }}">
+        {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderPost.css") }}">#}
         <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/style.css") }}">
     {% endblock %}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">
-    <script src="{{ asset("bundles/admin/js/jquery.min.js") }}"></script>
+    {% block slider_js %}
+        {#<script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>#}
+        <link rel="stylesheet" href="{{ asset("bundles/page/css/font-awesome.min.css") }}">
+        <script src="{{ asset("bundles/admin/js/jquery.min.js") }}"></script>
+    {% endblock %}
+
+    {#<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.css">#}
 </head>
 {% block body %}
 {% endblock %}
@@ -19,8 +24,9 @@
             src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
             crossorigin="anonymous"></script>
+    <script src="https://use.fontawesome.com/5077bea554.js"></script>
     {#<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.13/semantic.min.js"></script>#}
-    <script src="{{ asset("bundles/page/js/Script/sliders.js") }}" type="text/javascript"></script>
+    {#<script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>#}
 {% endblock %}
 
 </body>
