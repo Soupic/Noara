@@ -5,14 +5,16 @@
 }
 
 .menu-icon {
-    display: none;
+    display: block;
+    color: white;
 }
 
 .link-right, .link-left {
-    display: flex;
+    display: none;
+}
+
+#navbar {
     justify-content: space-around;
-    align-items: center;
-    flex: 1;
 }
 
 .logo {
@@ -59,17 +61,15 @@
     align-items: center;
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (min-width: 870px) {
     .menu-icon {
-        display: block;
-        color: white;
+    display: none;
     }
 
     .link-right, .link-left {
-        display: none;
-    }
-
-    #navbar {
-        justify-content: space-around;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
     }
 }

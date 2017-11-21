@@ -1,6 +1,8 @@
 .content-histoire {
-    width: 400px;
-    margin-bottom: 15px;
+    max-width: 750px;
+    margin-bottom: 25px;
+    margin-left: 5em;
+    margin-right: 5em;
 }
 
 .title-histoire, .title-page, .content-histoire, .histoire-button {
@@ -32,8 +34,8 @@
     width: 215px;
     height: 55px;
     border: 1px solid black;
-    border-radius: 3px;
-    background-color: black;
+    border-radius: 4px;
+    background-color: #121214;
     display: flex;
     align-items: center;
     justify-content: center;
