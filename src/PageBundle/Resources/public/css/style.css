@@ -3,36 +3,49 @@ body {
 }
 
 #actus {
-    background: url("../img/Media/Background_1.jpg");
-    height: 720px;
-    background-size: cover;
+    background: url("../img/SliderPosts/Backgrounds_1.png") no-repeat center;
+    height: 1080px;
+    /*background-size: cover;*/
+    display: flex;
+    flex-direction: column;
 }
 
 #histoire {
-    background: url("../img/Histoire/Background_2.png") ;
-    height: 842px;
-    margin-top: -7.9em;
+    background: url("../img/Histoire/Backgrounds_2.png") no-repeat center;
+    height: 1080px;
+    margin-top: -10.9em;
     background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #races {
-    background: url("../img/SliderRaces/Background_3.png");
-    margin-top: -7.9em;
-    height: 714px;
+    background: url("../img/SliderRaces/Backgrounds_3.png") no-repeat center;
+    margin-top: -10.9em;
+    height: 1080px;
     background-size: cover;
 }
 
 #sentier {
-    background: url("../img/Sentier/Background_4.png");
+    background: url("../img/Sentier/Backgrounds_4.png") no-repeat center;
     margin-top: -7.9em;
-    height: 1168px;
-    background-size: cover;
+    height: 1080px;
+    /*background-size: cover;*/
 }
 
 #perso {
-    /*background: url("../img/SliderCharacters/");*/
+    background: url("../img/SliderCharacters/Backgrounds_5.png") no-repeat center;
+    height: 1080px;
 }
 
 #footer {
-    background: url("../img/Footer/");
+    background: url("../img/Footer/Backgrounds_6.png") no-repeat center;
+    height: 1080px;
+}
+
+@media screen and (max-width: 550px) {
+    #actus {
+        justify-content: flex-start;
+    }
 }

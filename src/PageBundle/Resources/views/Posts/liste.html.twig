@@ -1,17 +1,17 @@
-{% extends "PageBundle:Default:index.html.twig" %}
+{#{% extends "PageBundle:Default:index.html.twig" %}#}
 
-{% block block_css %}
-    {{ parent() }}
-    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderPost.css") }}">
-{% endblock %}
-{% block slider_js %}
-    {{ parent() }}
-    <script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>
-{% endblock %}
+{#{% block block_css %}#}
+    {#{{ parent() }}#}
+    {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderPost.css") }}">#}
+{#{% endblock %}#}
+{#{% block slider_js %}#}
+    {#{{ parent() }}#}
+    {#<script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>#}
+{#{% endblock %}#}
 
 
 
-{% block body %}
+{#{% block body %}#}
     {#<div class="global">#}
         {#<div id="galerie">#}
             {#<div class="slider">#}
@@ -33,6 +33,7 @@
             {#<i class="medium right chevron icon orange suiv"></i>#}
             {#<i class="medium left chevron icon orange prec"></i>#}
         {#</div>#}
+    {{ include('PageBundle::navbar.html.twig') }}
     <div id="carrousel-post">
         {% for post in posts %}
             <div class="content-post-slider">
@@ -49,13 +50,13 @@
                 </div>
             </div>
         {% endfor %}
-        <i class="fa fa-angle-left fa-3x prev" aria-hidden="true"></i>
-        <i class="fa fa-angle-right fa-3x next" aria-hidden="true"></i>
+        <i class="fa fa-angle-left fa-3x prev-post" aria-hidden="true"></i>
+        <i class="fa fa-angle-right fa-3x next-post" aria-hidden="true"></i>
     </div>
     {#</div>#}
-{% endblock %}
+{#{% endblock %}#}
 
-{% block javascript %}
-    {{ parent() }}
+{#{% block javascript %}#}
+    {#{{ parent() }}#}
     {#<script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>#}
-{% endblock %}
+{#{% endblock %}#}

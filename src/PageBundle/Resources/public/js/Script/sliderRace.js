@@ -13,7 +13,7 @@ $( document ).ready(function() {
     // $carrousel.append('<div class="controls"> <span class="prev">Precedent</span> <span class="next">Suivant</span> </div>');
 
 
-    $('.next').click(function(){ // image suivante
+    $('.next-race').click(function(){ // image suivante
 
         i++; // on incrémente le compteur
 
@@ -30,7 +30,7 @@ $( document ).ready(function() {
 
     });
 
-    $('.prev').click(function(){ // image précédente
+    $('.prev-race').click(function(){ // image précédente
 
         i--; // on décrémente le compteur, puis on réalise la même chose que pour la fonction "suivante"
 

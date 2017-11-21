@@ -2,31 +2,40 @@
 
 {% block block_css %}
     {{ parent() }}
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/style.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderPost.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderCharacter.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/sliderRace.css") }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/histoire.css") }}">
 {% endblock %}
 
 {% block slider_js %}
     {{ parent() }}
+    <script src="{{ asset("bundles/page/js/Script/sliderPost.js") }}" type="text/javascript"></script>
+    <script src="{{ asset("bundles/page/js/Script/sliderCharacter.js") }}" type="text/javascript"></script>
+    <script src="{{ asset("bundles/page/js/Script/sliderRace.js") }}" type="text/javascript"></script>
+    <script src="{{ asset("bundles/page/js/Script/script.js") }}" type="text/javascript"></script>
 {% endblock %}
 
 
 {% block body %}
     <div id="actus">
         {#{% include "PageBundle:Posts:liste.html.twig" with {"posts" : "posts"} %}#}
-        {% for post in posts %}
-            {{ include('PageBundle:Posts:liste.html.twig', {"posts" : posts}) }}
-        {% endfor %}
+        {#{% for post in posts %}#}
+            {{ include('PageBundle:Posts:liste.html.twig') }}
+        {#{% endfor %}#}
     </div>
     <div id="histoire">
-
+        {{ include('PageBundle:Histoire:histoire.html.twig') }}
     </div>
     <div id="races">
-
+        {{ include('PageBundle:Races:liste.html.twig') }}
     </div>
     <div id="sentier">
 
     </div>
     <div id="perso">
-
+        {{ include('PageBundle:Characters:liste.html.twig') }}
     </div>
     <div id="footer">
 

@@ -1,0 +1,75 @@
+#navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu-icon {
+    display: none;
+}
+
+.link-right, .link-left {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+}
+
+.logo {
+    flex: initial;
+}
+
+.link-left {
+
+}
+
+.link-right a, .link-left a  {
+    width: auto;
+    /*margin-left: 25px;*/
+    /*margin-right: 25px;*/
+    text-decoration: none;
+    text-transform: uppercase;
+    color: white;
+    font-family: "SHKODER 1989";
+}
+
+.link-left a:hover, .link-right a:hover {
+    font-weight: bold;
+}
+
+#connexion {
+    width: 125px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background: green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#langue {
+    width: 50px;
+    height: 50px;
+    border: 2px solid white;
+    border-radius: 3px;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 550px) {
+    .menu-icon {
+        display: block;
+        color: white;
+    }
+
+    .link-right, .link-left {
+        display: none;
+    }
+
+    #navbar {
+        justify-content: space-around;
+    }
+}

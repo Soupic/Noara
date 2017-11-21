@@ -1,0 +1,56 @@
+.content-histoire {
+    width: 400px;
+    margin-bottom: 15px;
+}
+
+.title-histoire, .title-page, .content-histoire, .histoire-button {
+    text-transform: uppercase;
+    color: white;
+}
+
+.title-page, .content-histoire {
+    font-size: 17px;
+}
+
+.title-page {
+    font-family: "Avenir Light";
+}
+
+.title-histoire {
+    font-family: "SHKODER 1989";
+    font-weight: bold;
+    letter-spacing: 2px;
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.content-histoire, .histoire-button {
+    font-family: "Avenir Book";
+}
+
+.histoire-button {
+    width: 215px;
+    height: 55px;
+    border: 1px solid black;
+    border-radius: 3px;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.line-button-histoire {
+    width: 35px;
+    height: 2px;
+    background: white;
+    display: block;
+    margin-left: -35px;
+}
+
+.content-button-histoire {
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+

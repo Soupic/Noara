@@ -1,22 +1,27 @@
 {#{% extends "PageBundle::layout.html.twig" %}#}
 {#<div id="navbar">#}
 {% block block_css  %}
-    {#<link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/menus.css") }}">#}
+    <link rel="stylesheet" type="text/css" href="{{ asset("bundles/page/css/navbar.css") }}">
 {% endblock %}
 
-
-<div class="link-right">
-        <a href="#">JEU</a>
-        <a href="#">HISTOIRE</a>
-        <a href="#">MEDIAS</a>
+<div id="navbar">
+    <i class="fa fa-bars menu-icon fa-3x" aria-hidden="true"></i>
+    <div class="link-right">
+        <a href="#">le jeu</a>
+        <a href="#histoire">l'histoire</a>
+        <a href="#">médias</a>
     </div>
     <div class="logo">
         <img src="{{ asset("bundles/page/img/Navbar/Logo_Header_Noara.png") }}" alt="Logo Noara">
     </div>
     <div class="link-left">
-        <a href="#">ACTUS</a>
-        <a href="#">FORUM</a>
-        <a href="#">CONNEXION</a>
-        <a href="#">FR</a>
+        <a href="#actus">actus</a>
+        <a href="#">forum</a>
+        <div id="connexion">
+            <a href="#">connexion</a>
+        </div>
+        <div id="langue">
+            <a href="#">fr</a>
+        </div>
     </div>
-{#</div>#}
+</div>

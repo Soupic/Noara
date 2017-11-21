@@ -3,13 +3,13 @@
     width: 100%;
     height: 100%;
     /* Permet de garder le ratio de du background lors de l'agrandissement de la fenetre */
-    background: url("../img/SliderCharacters/Backgrounds_5.png") no-repeat center fixed;
+    /*background: url("../img/SliderCharacters/Backgrounds_5.png") no-repeat center fixed;*/
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    align-content: center;
 }
 
 #name-character {
@@ -40,6 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    order: 2;
 }
 
 .content-character-slider img {
@@ -49,44 +50,44 @@
     padding-bottom: 2em;
 }
 
-.next {
-    position: fixed;
-    top: 50%;
-    right: 20px;
+.next-char {
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*right: 20px;*/
     color: white;
     width: 50px;
     height: 50px;
     border: 1px solid grey;
     border-radius: 3px;
+    order: 2;
 }
 
-.prev {
-    position: fixed;
-    top: 50%;
-    left: 20px;
+.prev-char {
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 20px;*/
     color: white;
     width: 50px;
     height: 50px;
     border: 1px solid grey;
     border-radius: 3px;
+    order: 1;
 }
 
-.next .prev {
-}
 
-.prev:before {
+.prev-char:before {
     margin-left: 14px
 }
 
-.next:before {
+.next-char:before {
     margin-left: 17px;
 }
 
-.prev:before:hover {
+.prev-char:before:hover {
     opacity: 0.5;
 }
 
-.button {
+.button-char {
     display: flex;
     background-color: #3C3B48;
     align-items: center;
@@ -98,11 +99,11 @@
     height: 40px;
 }
 
-.line {
+.line-char {
     display: none;
 }
 
-#content-button {
+#content-button-char {
     color: white;
     font-family: "Avenir Book";
     text-transform: uppercase;
@@ -116,12 +117,12 @@
         width: 440px;
     }
 
-    .button {
+    .button-char {
         width: 150px;
         height: 50px;
     }
 
-    #content-button {
+    #content-button-char {
         font-size: 17px;
     }
 }
@@ -154,24 +155,24 @@
         align-items: flex-end;
     }
 
-    .line-button {
+    .line-button-char {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
 
-    .next {
+    .next-char {
         right: 150px;
     }
 
-    .content {
+    .content-char {
         display: flex;
         flex-direction: row;
         align-items: center;
     }
 
-    .line-content {
+    .line-content-char {
         width: 55px;
         height: 2px;
         background: white;
@@ -179,14 +180,14 @@
         margin-left: 1em;
     }
 
-    .line {
+    .line-char {
         width: 70px;
         height: 2px;
         background: white;
         display: block;
     }
 
-    .button {
+    .button-char {
         width: 200px;
         height: 50px;
     }
@@ -206,11 +207,11 @@
         padding: 0;
     }
 
-    .next {
+    .next-char {
         right: 5em;
     }
 
-    .prev {
+    .prev-char {
         left: 2em;
     }
 }

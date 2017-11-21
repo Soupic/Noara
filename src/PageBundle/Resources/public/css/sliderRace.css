@@ -3,13 +3,15 @@
     width: 100%;
     height: 100%;
     /* Permet de garder le ratio de du background lors de l'agrandissement de la fenetre */
-    background: url("../img/SliderRaces/Backgrounds_3.png") no-repeat center fixed;
+    /*background: url("../img/SliderRaces/Backgrounds_3.png") no-repeat center fixed;*/
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+    align-content: center;
     justify-content: center;
+    padding-top: 30px;
 }
 
 .race-content {
@@ -36,6 +38,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    order: 2;
 }
 
 .content-race-slider img {
@@ -46,44 +49,46 @@
     padding-top: 0;
 }
 
-.next {
-    position: fixed;
-    top: 50%;
-    right: 20px;
+.next-race {
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*right: 20px;*/
     color: black;
     width: 50px;
     height: 50px;
     border: 1px solid grey;
     border-radius: 3px;
+    order: 3;
 }
 
-.prev {
-    position: fixed;
-    top: 50%;
-    left: 20px;
+.prev-race {
+    /*position: fixed;*/
+    /*top: 50%;*/
+    /*left: 20px;*/
     color: black;
     width: 50px;
     height: 50px;
     border: 1px solid grey;
     border-radius: 3px;
+    order: 1;
 }
 
 .next .prev {
 }
 
-.prev:before {
+.prev-race:before {
     margin-left: 14px
 }
 
-.next:before {
+.next-race:before {
     margin-left: 17px;
 }
 
-.prev:before:hover {
+.prev-race:before:hover {
     opacity: 0.5;
 }
 
-.button {
+.button-race {
     display: flex;
     background-color: #060512;
     align-items: center;
@@ -95,7 +100,7 @@
     height: 35px;
 }
 
-.line {
+.line-race {
     display: none;
 }
 
@@ -107,11 +112,11 @@
     text-transform: uppercase;
 }
 
-#content {
+#content-race {
     display: none;
 }
 
-#content-button {
+#content-button-race {
     color: white;
     font-family: "SHKODER 1989";
     text-transform: uppercase;
@@ -120,7 +125,7 @@
     font-size: 17px;
 }
 
-.button:hover {
+.button-race:hover {
     opacity: 0.5;
 }
 
@@ -130,7 +135,7 @@
         height: auto;
     }
 
-    .button {
+    .button-race {
         width: 150px;
         height: 45px;
     }
@@ -149,7 +154,7 @@
         letter-spacing: 5px;
     }
 
-    #content {
+    #content-race {
         display: block;
         width: 50%;
         font-family: "Avenir Light";
@@ -158,7 +163,7 @@
         font-size: 13px;
     }
 
-    .prev {
+    .prev-race {
         left: 35px;
     }
 }
@@ -189,30 +194,30 @@
         letter-spacing: 7px;
     }
 
-    #content {
+    #content-race {
         margin-bottom: 40px;
         width: 28em;
         text-align: start;
         font-size: 15px;
     }
 
-    .next {
+    .next-race {
         right: 117px;
     }
 
-    .line-button {
+    .line-button-race {
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
     }
 
-    .button {
+    .button-race {
         width: 175px;
         height: 50px;
     }
 
-    .line {
+    .line-race {
         width: 35px;
         height: 2px;
         background: black;
@@ -287,11 +292,11 @@
         padding: 0;
     }
 
-    .next {
+    .next-race {
         right: 250px;
     }
 
-    .prev {
+    .prev-race {
         left: 40px;
     }
 
@@ -299,12 +304,12 @@
         font-size: 65px;
     }
 
-    #content {
+    #content-race {
         width: 65%;
         font-size: 19px;
     }
 
-    .line {
+    .line-race {
         width: 40px;
         margin-left: -40px;
     }

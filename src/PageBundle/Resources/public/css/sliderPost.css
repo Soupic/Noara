@@ -12,42 +12,65 @@ body {
 #carrousel-post {
     position: absolute;
     width: 100%;
-    min-height: 1080px;
+    /*min-height: 1080px;*/
     /* Permet de garder le ratio de du background lors de l'agrandissement de la fenetre */
     margin:0;
     padding:0;
     padding-bottom: 10em;
-    background: url("../img/SliderPosts/Backgrounds_1.png") no-repeat center fixed;
+    /*background: url("../img/SliderPosts/Backgrounds_1.png") no-repeat center fixed;*/
     -webkit-background-size: cover; /* pour anciens Chrome et Safari */
     background-size: cover; /* version standardisée */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
 }
 
-.next {
-    position: fixed;
+.next-post {
+    /*position: fixed;*/
     top: 50%;
     right: 4em;
     color: white;
+    order: 3;
 }
 
 
-.prev {
-    position: fixed;
+.prev-post {
+    /*position: fixed;*/
     top: 50%;
     left: 30px;
     color: white;
+    order: 1;
 }
 
-.prev:hover {
+.next-post, .prev-post {
+    width: 50px;
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+
+.prev-post:before {
+    margin-left: 12px
+}
+
+.next-post:before {
+    margin-left: 14px;
+}
+
+.prev-post:hover {
     opacity: 0.5;
 }
 
-.next:hover {
+.next-post:hover {
     opacity: 0.5;
 }
 
 .content-post-slider {
     flex-direction: column;
     padding: 16em 19em 0 20em;
+    order: 2;
 }
 
 .post-title {
@@ -134,15 +157,15 @@ body {
         position: relative;
     }
 
-    .next {
-        position: fixed;
+    .next-post {
+        /*position: fixed;*/
         top: 50%;
         right: 20px;
         color: white;
     }
 
-    .prev {
-        position: fixed;
+    .prev-post {
+        /*position: fixed;*/
         top: 50%;
         left: 20px;
         color: white;
@@ -207,22 +230,26 @@ body {
     }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (min-width: 530px) {
     #carrousel-post {
         position: relative;
+        justify-content: space-around;
+        align-items: center;
+        /*min-height: 100%;*/
+        padding-bottom: 0;
     }
 
-    .prev {
-        position: fixed;
-        top: 50%;
-        right: 7px;
+    .prev-post {
+        /*position: fixed;*/
+        top: 0;
+        right: 0;
         color: white;
     }
 
-    .next {
-        position: fixed;
-        top: 50%;
-        right: 15px;
+    .next-post {
+        /*position: fixed;*/
+        top: 0;
+        right: 0;
         color: white;
     }
 
@@ -231,11 +258,13 @@ body {
     /****************************/
 
     .content-post-slider {
-        width: auto;
+        width: 400px;
         height: auto;
-        margin: 0 2em 0 4.5em;
+        margin: 0 0 0 0;
+        padding: 0 0 0 0;
+        display: flex;
         flex-direction: column;
-        padding: 10em 0 0 0;
+        /*align-self: flex-start;*/
     }
 
     .post-title {
@@ -256,6 +285,8 @@ body {
     }
 
     .post-content{
+        display: flex;
+        flex-direction: column;
         font-size: large;
         color: white;
         font-family: "Avenir Light";
@@ -264,7 +295,8 @@ body {
     .post-content img {
         width: 240px;
         height: auto;
-        margin: 0 3em 2em 0;
+        margin: 0 0 0 0;
+        display: none;
     }
 
     .slider-post, .slider-races {

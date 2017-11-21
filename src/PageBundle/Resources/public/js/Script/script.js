@@ -1,4 +1,7 @@
 $(document).ready(function() {
-    var btnVoir = $('#content-button');
-    console.log(btnVoir);
+    var btnRace = $('.histoire-button');
+    var contentBtRace = $('#content-button-histoire');
+    btnRace.mouseover(function() {
+        console.log(contentBtRace);
+    });
 });
